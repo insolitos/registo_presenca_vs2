@@ -14,51 +14,51 @@
     
     <style>
         :root {
-          /* Light Mode Color Tokens */
-          --color-background: #FCFCF9;
-          --color-surface: #FFFFFF;
-          --color-text: #13343B;
-          --color-text-secondary: #626C71;
-          --color-primary: #21808D;
-          --color-primary-hover: #1D727E;
-          --color-border: rgba(94, 82, 64, 0.2);
-          --color-btn-primary-text: #FFFFFF;
-          --color-secondary: rgba(94, 82, 64, 0.12);
-          --color-warning: #A84B2F;
-          --color-danger: #B91C1C;
-          --color-focus-ring: rgba(33, 128, 141, 0.4);
+            /* Light Mode Color Tokens */
+            --color-background: #FCFCF9;
+            --color-surface: #FFFFFF;
+            --color-text: #13343B;
+            --color-text-secondary: #626C71;
+            --color-primary: #21808D;
+            --color-primary-hover: #1D727E;
+            --color-border: rgba(94, 82, 64, 0.2);
+            --color-btn-primary-text: #FFFFFF;
+            --color-secondary: rgba(94, 82, 64, 0.12);
+            --color-warning: #A84B2F;
+            --color-danger: #B91C1C;
+            --color-focus-ring: rgba(33, 128, 141, 0.4);
         }
 
         [data-color-scheme="dark"] {
-          /* Dark Mode Color Tokens */
-          --color-background: #1F2121;
-          --color-surface: #262828;
-          --color-text: #F5F5F5;
-          --color-text-secondary: rgba(167, 169, 169, 0.7);
-          --color-primary: #32B8C6;
-          --color-primary-hover: #2DA2AF;
-          --color-border: rgba(119, 124, 124, 0.3);
-          --color-btn-primary-text: #13343B;
-          --color-secondary: rgba(119, 124, 124, 0.15);
-          --color-warning: #E68161;
-          --color-danger: #F87171;
-          --color-focus-ring: rgba(50, 184, 198, 0.4);
+            /* Dark Mode Color Tokens */
+            --color-background: #1F2121;
+            --color-surface: #262828;
+            --color-text: #F5F5F5;
+            --color-text-secondary: rgba(167, 169, 169, 0.7);
+            --color-primary: #32B8C6;
+            --color-primary-hover: #2DA2AF;
+            --color-border: rgba(119, 124, 124, 0.3);
+            --color-btn-primary-text: #13343B;
+            --color-secondary: rgba(119, 124, 124, 0.15);
+            --color-warning: #E68161;
+            --color-danger: #F87171;
+            --color-focus-ring: rgba(50, 184, 198, 0.4);
         }
 
         :root {
-          /* Shared Design Tokens */
-          --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-          --font-size-sm: 12px; --font-size-base: 14px; --font-size-lg: 16px;
-          --font-size-xl: 18px; --font-size-2xl: 20px; --font-size-3xl: 24px;
-          --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px;
-          --space-20: 20px; --space-24: 24px; --space-32: 32px;
-          --radius-base: 8px; --radius-lg: 12px; --radius-full: 9999px;
-          --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-          --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-          --duration-normal: 250ms;
-          --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
-          --container-lg: 1024px;
+            /* Shared Design Tokens */
+            --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-size-sm: 12px; --font-size-base: 14px; --font-size-lg: 16px;
+            --font-size-xl: 18px; --font-size-2xl: 20px; --font-size-3xl: 24px;
+            --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px;
+            --space-20: 20px; --space-24: 24px; --space-32: 32px;
+            --radius-base: 8px; --radius-lg: 12px; --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --duration-normal: 250ms;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+            --container-lg: 1024px;
         }
 
         html { font-family: var(--font-family-base); color: var(--color-text); background-color: var(--color-background); -webkit-font-smoothing: antialiased; box-sizing: border-box; }
@@ -76,7 +76,7 @@
         .btn--outline { background: transparent; border: 1px solid var(--color-border); color: var(--color-text); }
         .btn--outline:hover { background: var(--color-secondary); }
         .btn--danger { background: var(--color-danger); color: white; }
-        .btn > span { margin-right: var(--space-8); }
+        .btn > span:not(:last-child) { margin-right: var(--space-8); }
         .btn--sm { padding: var(--space-4) var(--space-8); font-size: var(--font-size-sm); }
 
 
@@ -98,7 +98,7 @@
         .header-title p { color: rgba(255, 255, 255, 0.8); font-size: var(--font-size-sm); }
         [data-color-scheme="dark"] .header-title p { color: rgba(0, 0, 0, 0.8); }
         .header-actions { display: flex; gap: var(--space-8); }
-        .btn-icon { background: rgba(255, 255, 255, 0.2); border: none; border-radius: var(--radius-full); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--color-btn-primary-text); cursor: pointer; transition: background var(--duration-normal); }
+        .btn-icon { background: rgba(255, 255, 255, 0.2); border: none; border-radius: var(--radius-full); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--color-btn-primary-text); cursor: pointer; transition: background var(--duration-normal); font-size: 1.2rem; }
         .btn-icon:hover { background: rgba(255, 255, 255, 0.3); }
         [data-color-scheme="dark"] .btn-icon { background: rgba(0, 0, 0, 0.2); }
         [data-color-scheme="dark"] .btn-icon:hover { background: rgba(0, 0, 0, 0.3); }
@@ -128,6 +128,7 @@
         
         .students-list { display: flex; flex-direction: column; gap: var(--space-8); margin-bottom: var(--space-24); }
         .student-item { background: var(--color-surface); border-radius: var(--radius-base); padding: var(--space-16); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: transform 0.3s ease, background 0.1s linear; touch-action: pan-y; position: relative; overflow: hidden; }
+        .student-item.swiping { transition: none; } /* Disable transition while swiping */
         .student-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #e0e0e0; transition: background var(--duration-normal); }
         .student-item.presente::before { background: #4CAF50; } .student-item.ausente::before { background: #F44336; } .student-item.atrasado::before { background: #FF9800; } .student-item.justificado::before { background: #2196F3; }
         .student-info { display: flex; align-items: center; gap: var(--space-12); }
@@ -189,7 +190,7 @@
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
         <div class="loading-spinner"></div>
-        <p>A carregar...</p>
+        <p data-translate="loading">A carregar...</p>
     </div>
 
     <!-- Main App Container -->
@@ -198,15 +199,15 @@
         <header class="app-header">
             <div class="header-content">
                 <button id="back-btn" class="btn-icon hidden">
-                    <span>←</span>
+                    <span>&larr;</span>
                 </button>
                 <div class="header-title">
-                    <h1 id="page-title">Registo de Presenças</h1>
+                    <h1 id="page-title" data-translate="appTitle">Registo de Presenças</h1>
                     <p id="page-subtitle"></p>
                 </div>
                 <div class="header-actions">
                     <button id="settings-btn" class="btn-icon" title="Configurações">
-                        <span>⚙️</span>
+                        <span>&#9881;</span>
                     </button>
                 </div>
             </div>
@@ -221,34 +222,34 @@
                         <div class="stat-icon">👥</div>
                         <div class="stat-info">
                             <h3 id="total-students">0</h3>
-                            <p>Total de Alunos</p>
+                            <p data-translate="totalStudents">Total de Alunos</p>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">✓</div>
+                        <div class="stat-icon">&#10003;</div>
                         <div class="stat-info">
                             <h3 id="present-today">0</h3>
-                            <p>Presentes Hoje</p>
+                            <p data-translate="presentToday">Presentes Hoje</p>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">✗</div>
+                        <div class="stat-icon">&#10007;</div>
                         <div class="stat-info">
                             <h3 id="absent-today">0</h3>
-                            <p>Ausentes Hoje</p>
+                            <p data-translate="absentToday">Ausentes Hoje</p>
                         </div>
                     </div>
                 </div>
                 <div class="section">
-                    <h2>As Minhas Turmas</h2>
+                    <h2 data-translate="myClasses">As Minhas Turmas</h2>
                     <div id="classes-grid" class="classes-grid"></div>
                 </div>
                 <div class="section">
-                    <h2>Acesso Rápido</h2>
+                    <h2 data-translate="quickAccess">Acesso Rápido</h2>
                     <div class="quick-actions">
-                        <button id="show-reports-btn" class="btn btn--primary"><span>📊</span> Relatórios</button>
-                        <button id="show-history-btn" class="btn btn--primary"><span>📋</span> Histórico</button>
-                        <button id="show-individual-report-btn" class="btn btn--primary"><span>👤</span> Relatório de Aluno</button>
+                        <button id="show-reports-btn" class="btn btn--primary"><span >📊</span> <span data-translate="reports">Relatórios</span></button>
+                        <button id="show-history-btn" class="btn btn--primary"><span>📋</span> <span data-translate="history">Histórico</span></button>
+                        <button id="show-individual-report-btn" class="btn btn--primary"><span>👤</span> <span data-translate="studentReport">Relatório de Aluno</span></button>
                     </div>
                 </div>
             </div>
@@ -260,15 +261,15 @@
                 </div>
                 <div id="students-list" class="students-list"></div>
                 <div class="section-header-actions" style="margin-top: 16px;">
-                    <button id="mark-all-present-btn" class="btn btn--primary"><span>✓</span> Marcar Todos Presentes</button>
+                    <button id="mark-all-present-btn" class="btn btn--primary"><span>&#10003;</span> <span data-translate="markAllPresent">Marcar Todos Presentes</span></button>
                 </div>
             </div>
             
             <!-- Management View -->
             <div id="management-view" class="view">
                 <div class="section-header">
-                    <h2>Gerir Turmas</h2>
-                    <button id="add-class-btn" class="btn btn--primary"><span>+</span>Adicionar Turma</button>
+                    <h2 data-translate="manageClasses">Gerir Turmas</h2>
+                    <button id="add-class-btn" class="btn btn--primary"><span>+</span><span data-translate="addClass">Adicionar Turma</span></button>
                 </div>
                 <div id="management-list" class="management-list"></div>
             </div>
@@ -276,21 +277,21 @@
             <!-- Reports View -->
             <div id="reports-view" class="view">
                 <div class="section-header">
-                    <h2>Relatórios Semanais</h2>
+                    <h2 data-translate="weeklyReports">Relatórios Semanais</h2>
                     <div class="section-header-actions">
                         <input type="week" id="week-picker" class="form-control" style="max-width: 200px;">
-                        <button id="export-report-btn" class="btn btn--outline"><span>↓</span> Exportar (CSV)</button>
+                        <button id="export-report-btn" class="btn btn--outline"><span>&darr;</span> <span data-translate="exportCsv">Exportar (CSV)</span></button>
                     </div>
                 </div>
                 <div class="reports-grid">
                     <div class="report-card">
-                        <h3>Estatísticas da Semana</h3>
+                        <h3 data-translate="weekStats">Estatísticas da Semana</h3>
                         <div class="chart-container" style="position: relative; height: 300px;">
                             <canvas id="weekly-chart"></canvas>
                         </div>
                     </div>
                     <div class="report-card">
-                        <h3>Resumo Semanal</h3>
+                        <h3 data-translate="weeklySummary">Resumo Semanal</h3>
                         <div id="weekly-summary" class="summary-grid"></div>
                     </div>
                 </div>
@@ -299,11 +300,11 @@
             <!-- History View -->
             <div id="history-view" class="view">
                 <div class="section-header">
-                    <h2>Histórico de Presenças</h2>
-                    <button id="export-history-btn" class="btn btn--outline"><span>↓</span> Exportar Vista (CSV)</button>
+                    <h2 data-translate="attendanceHistory">Histórico de Presenças</h2>
+                    <button id="export-history-btn" class="btn btn--outline"><span>&darr;</span> <span data-translate="exportViewCsv">Exportar Vista (CSV)</span></button>
                 </div>
                 <div class="history-filters">
-                    <select id="class-filter" class="form-control"><option value="">Todas as turmas</option></select>
+                    <select id="class-filter" class="form-control"><option value="" data-translate="allClasses">Todas as turmas</option></select>
                     <input type="date" id="date-filter" class="form-control">
                 </div>
                 <div id="history-list" class="history-list" style="margin-top: 24px;"></div>
@@ -312,12 +313,12 @@
             <!-- Individual Report View -->
             <div id="individual-report-view" class="view">
                 <div class="section-header">
-                    <h2>Relatório Individual de Aluno</h2>
-                    <button id="export-individual-report-btn" class="btn btn--outline"><span>↓</span> Exportar (CSV)</button>
+                    <h2 data-translate="individualStudentReport">Relatório Individual de Aluno</h2>
+                    <button id="export-individual-report-btn" class="btn btn--outline"><span>&darr;</span> <span data-translate="exportCsv">Exportar (CSV)</span></button>
                 </div>
                 <div class="history-filters">
-                    <select id="individual-report-class-filter" class="form-control"><option value="">Selecione uma turma...</option></select>
-                    <select id="individual-report-student-filter" class="form-control" disabled><option value="">Selecione um aluno...</option></select>
+                    <select id="individual-report-class-filter" class="form-control"><option value="" data-translate="selectClass">Selecione uma turma...</option></select>
+                    <select id="individual-report-student-filter" class="form-control" disabled><option value="" data-translate="selectStudent">Selecione um aluno...</option></select>
                     <input type="date" id="individual-report-start-date" class="form-control">
                     <input type="date" id="individual-report-end-date" class="form-control">
                 </div>
@@ -332,7 +333,7 @@
         </main>
 
         <!-- FAB -->
-        <button id="fab" class="fab" title="Registo Rápido"><span>✓</span></button>
+        <button id="fab" class="fab" title="Registo Rápido"><span>&#10003;</span></button>
     </div>
 
     <!-- Modals -->
@@ -340,23 +341,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modal-student-name"></h3>
-                <button id="modal-close-btn" class="btn-icon"><span>✕</span></button>
+                <button id="modal-close-btn" class="btn-icon"><span>&times;</span></button>
             </div>
             <div class="modal-body">
                 <div id="modal-attendance-options" class="attendance-options">
-                    <button class="btn attendance-btn" data-status="presente"><span>✓</span> Presente</button>
-                    <button class="btn attendance-btn" data-status="ausente"><span>✗</span> Ausente</button>
-                    <button class="btn attendance-btn" data-status="atrasado"><span>⏰</span> Atrasado</button>
-                    <button class="btn attendance-btn" data-status="justificado"><span>📄</span> Justificado</button>
+                    <button class="btn attendance-btn" data-status="presente"><span>&#10003;</span> <span data-translate="present">Presente</span></button>
+                    <button class="btn attendance-btn" data-status="ausente"><span>&#10007;</span> <span data-translate="absent">Ausente</span></button>
+                    <button class="btn attendance-btn" data-status="atrasado"><span>&#9200;</span> <span data-translate="late">Atrasado</span></button>
+                    <button class="btn attendance-btn" data-status="justificado"><span>&#128196;</span> <span data-translate="justified">Justificado</span></button>
                 </div>
                 <div class="note-section">
-                    <label class="form-label">Observações</label>
+                    <label class="form-label" data-translate="notes">Observações</label>
                     <textarea id="student-note" class="form-control" rows="3"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="modal-cancel-btn" class="btn btn--outline">Cancelar</button>
-                <button id="modal-save-btn" class="btn btn--primary">Guardar</button>
+                <button id="modal-cancel-btn" class="btn btn--outline" data-translate="cancel">Cancelar</button>
+                <button id="modal-save-btn" class="btn btn--primary" data-translate="save">Guardar</button>
             </div>
         </div>
     </div>
@@ -364,35 +365,43 @@
     <div id="settings-modal" class="modal hidden">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Configurações</h3>
-                <button id="settings-modal-close-btn" class="btn-icon"><span>✕</span></button>
+                <h3 data-translate="settings">Configurações</h3>
+                <button id="settings-modal-close-btn" class="btn-icon"><span>&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="setting-item">
-                    <label for="school-name-input" class="form-label">Nome da Escola</label>
+                    <label for="school-name-input" class="form-label" data-translate="schoolName">Nome da Escola</label>
                     <div style="display: flex; gap: 8px;">
                         <input type="text" id="school-name-input" class="form-control">
-                        <button type="button" id="save-school-name-btn" class="btn btn--primary">Guardar</button>
+                        <button type="button" id="save-school-name-btn" class="btn btn--primary" data-translate="save">Guardar</button>
                     </div>
                 </div>
                 <div class="setting-item">
-                    <label class="form-label">Tema da Aplicação</label>
+                    <label class="form-label" data-translate="appTheme">Tema da Aplicação</label>
                     <div class="theme-options">
-                        <button id="theme-light-btn" class="btn btn--outline">Claro</button>
-                        <button id="theme-dark-btn" class="btn btn--outline">Escuro</button>
+                        <button id="theme-light-btn" class="btn btn--outline" data-translate="light">Claro</button>
+                        <button id="theme-dark-btn" class="btn btn--outline" data-translate="dark">Escuro</button>
+                    </div>
+                </div>
+                 <div class="setting-item">
+                    <label class="form-label" data-translate="language">Idioma</label>
+                    <div class="theme-options">
+                        <button id="lang-pt-btn" class="btn btn--outline">Português</button>
+                        <button id="lang-en-btn" class="btn btn--outline">English</button>
+                        <button id="lang-es-btn" class="btn btn--outline">Español</button>
                     </div>
                 </div>
                 <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--space-20) 0;">
                 <div class="setting-item">
-                    <label class="form-label">Gestão de Dados</label>
-                    <button id="manage-classes-btn" class="btn btn--primary">Gerir Turmas e Alunos</button>
+                    <label class="form-label" data-translate="dataManagement">Gestão de Dados</label>
+                    <button id="manage-classes-btn" class="btn btn--primary" data-translate="manageClassesStudents">Gerir Turmas e Alunos</button>
                 </div>
                 <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--space-20) 0;">
                 <div class="setting-item">
-                    <label class="form-label">Backup e Restauro</label>
+                    <label class="form-label" data-translate="backupRestore">Backup e Restauro</label>
                     <div class="quick-actions">
-                        <button id="backup-data-btn" class="btn btn--outline"><span>↓</span> Exportar Todos os Dados</button>
-                        <button id="restore-data-btn" class="btn btn--outline"><span>↑</span> Importar Dados</button>
+                        <button id="backup-data-btn" class="btn btn--outline"><span>&darr;</span> <span data-translate="exportAllData">Exportar Todos os Dados</span></button>
+                        <button id="restore-data-btn" class="btn btn--outline"><span>&uarr;</span> <span data-translate="importData">Importar Dados</span></button>
                         <input type="file" id="restore-file-input" class="hidden" accept=".json">
                     </div>
                 </div>
@@ -405,25 +414,25 @@
             <form id="class-editor-form">
                 <div class="modal-header">
                     <h3 id="class-editor-title"></h3>
-                    <button type="button" class="btn-icon class-editor-close-btn"><span>✕</span></button>
+                    <button type="button" class="btn-icon class-editor-close-btn"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="edit-class-id">
-                    <div class="form-group"><label for="edit-class-name" class="form-label">Nome da Turma</label><input type="text" id="edit-class-name" class="form-control" required></div>
-                    <div class="form-group"><label for="edit-class-subject" class="form-label">Disciplina</label><input type="text" id="edit-class-subject" class="form-control"></div>
-                    <div class="form-group"><label for="edit-class-teacher" class="form-label">Professor</label><input type="text" id="edit-class-teacher" class="form-control"></div>
+                    <div class="form-group"><label for="edit-class-name" class="form-label" data-translate="className">Nome da Turma</label><input type="text" id="edit-class-name" class="form-control" required></div>
+                    <div class="form-group"><label for="edit-class-subject" class="form-label" data-translate="subject">Disciplina</label><input type="text" id="edit-class-subject" class="form-control"></div>
+                    <div class="form-group"><label for="edit-class-teacher" class="form-label" data-translate="teacher">Professor</label><input type="text" id="edit-class-teacher" class="form-control"></div>
                     <div class="section-header">
-                        <h4>Alunos</h4>
+                        <h4 data-translate="students">Alunos</h4>
                         <div class="section-header-actions">
-                             <button type="button" id="import-students-btn" class="btn btn--outline btn--sm"><span>↑</span> Importar</button>
-                             <button type="button" id="add-student-btn" class="btn btn--primary btn--sm"><span>+</span> Adicionar</button>
+                             <button type="button" id="import-students-btn" class="btn btn--outline btn--sm"><span>&uarr;</span> <span data-translate="import">Importar</span></button>
+                             <button type="button" id="add-student-btn" class="btn btn--primary btn--sm"><span>+</span> <span data-translate="add">Adicionar</span></button>
                         </div>
                     </div>
                     <div id="class-editor-student-list" class="management-list"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn--outline class-editor-close-btn">Cancelar</button>
-                    <button type="submit" class="btn btn--primary">Guardar Turma</button>
+                    <button type="button" class="btn btn--outline class-editor-close-btn" data-translate="cancel">Cancelar</button>
+                    <button type="submit" class="btn btn--primary" data-translate="saveClass">Guardar Turma</button>
                 </div>
             </form>
         </div>
@@ -432,15 +441,15 @@
     <div id="student-editor-modal" class="modal hidden">
         <div class="modal-content">
              <form id="student-editor-form">
-                <div class="modal-header"><h3 id="student-editor-title"></h3><button type="button" class="btn-icon student-editor-close-btn"><span>✕</span></button></div>
+                <div class="modal-header"><h3 id="student-editor-title"></h3><button type="button" class="btn-icon student-editor-close-btn"><span>&times;</span></button></div>
                 <div class="modal-body">
                     <input type="hidden" id="edit-student-id"><input type="hidden" id="edit-student-class-id">
-                    <div class="form-group"><label for="edit-student-name" class="form-label">Nome do Aluno</label><input type="text" id="edit-student-name" class="form-control" required></div>
-                    <div class="form-group"><label for="edit-student-number" class="form-label">Número</label><input type="number" id="edit-student-number" class="form-control" required></div>
+                    <div class="form-group"><label for="edit-student-name" class="form-label" data-translate="studentName">Nome do Aluno</label><input type="text" id="edit-student-name" class="form-control" required></div>
+                    <div class="form-group"><label for="edit-student-number" class="form-label" data-translate="number">Número</label><input type="number" id="edit-student-number" class="form-control" required></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn--outline student-editor-close-btn">Cancelar</button>
-                    <button type="submit" class="btn btn--primary">Guardar Aluno</button>
+                    <button type="button" class="btn btn--outline student-editor-close-btn" data-translate="cancel">Cancelar</button>
+                    <button type="submit" class="btn btn--primary" data-translate="saveStudent">Guardar Aluno</button>
                 </div>
             </form>
         </div>
@@ -448,15 +457,15 @@
 
     <div id="student-importer-modal" class="modal hidden">
         <div class="modal-content">
-            <div class="modal-header"><h3>Importar Alunos</h3><button type="button" class="btn-icon student-importer-close-btn"><span>✕</span></button></div>
+            <div class="modal-header"><h3 data-translate="importStudents">Importar Alunos</h3><button type="button" class="btn-icon student-importer-close-btn"><span>&times;</span></button></div>
             <div class="modal-body">
-                <p>Cole a lista de alunos abaixo. Use o formato: <strong>Número, Nome</strong> (um aluno por linha).</p>
+                <p data-translate="importStudentsHelp">Cole a lista de alunos abaixo. Use o formato: <strong>Número, Nome</strong> (um aluno por linha).</p>
                 <div class="form-group"><textarea id="import-student-list" class="form-control" rows="10" placeholder="1, Ana Silva&#10;2, Bruno Costa&#10;..."></textarea></div>
-                <div id="import-preview-container" class="hidden"><h4>Pré-visualização</h4><div id="import-preview" class="management-list"></div></div>
+                <div id="import-preview-container" class="hidden"><h4 data-translate="preview">Pré-visualização</h4><div id="import-preview" class="management-list"></div></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn--outline student-importer-close-btn">Cancelar</button>
-                <button type="button" id="import-students-confirm-btn" class="btn btn--primary">Importar</button>
+                <button type="button" class="btn btn--outline student-importer-close-btn" data-translate="cancel">Cancelar</button>
+                <button type="button" id="import-students-confirm-btn" class="btn btn--primary" data-translate="import">Importar</button>
             </div>
         </div>
     </div>
@@ -466,8 +475,8 @@
             <div class="modal-header"><h3 id="confirm-title"></h3></div>
             <div class="modal-body"><p id="confirm-message"></p></div>
             <div class="modal-footer">
-                <button id="confirm-cancel-btn" class="btn btn--outline">Cancelar</button>
-                <button id="confirm-ok-btn" class="btn btn--danger">Confirmar</button>
+                <button id="confirm-cancel-btn" class="btn btn--outline" data-translate="cancel">Cancelar</button>
+                <button id="confirm-ok-btn" class="btn btn--danger" data-translate="confirm">Confirmar</button>
             </div>
         </div>
     </div>
@@ -478,19 +487,129 @@
         class AttendanceApp {
             constructor() {
                 this.db = null;
-                this.currentClass = null;
-                this.currentStudent = null;
+                this.currentClassId = null; // Use ID for context
+                this.currentStudentId = null; // Use ID for context
                 this.data = { turmas: [] };
                 this.schoolName = 'A Minha Escola';
-                this.attendanceData = []; // Now an array to store all records
+                this.attendanceData = [];
                 this.charts = {};
+                this.currentLanguage = 'pt';
 
                 // Swipe gesture properties
                 this.touchStartX = 0;
                 this.touchStartY = 0;
+                this.touchEndX = 0;
+                this.touchEndY = 0;
                 this.swipedItem = null;
-                this.isSwiping = false;
                 
+                this.translations = {
+                    pt: {
+                        loading: "A carregar...", appTitle: "Registo de Presenças", totalStudents: "Total de Alunos",
+                        presentToday: "Presentes Hoje", absentToday: "Ausentes Hoje", myClasses: "As Minhas Turmas",
+                        quickAccess: "Acesso Rápido", reports: "Relatórios", history: "Histórico", studentReport: "Relatório de Aluno",
+                        markAllPresent: "Marcar Todos Presentes", manageClasses: "Gerir Turmas", addClass: "Adicionar Turma",
+                        weeklyReports: "Relatórios Semanais", exportCsv: "Exportar (CSV)", weekStats: "Estatísticas da Semana",
+                        weeklySummary: "Resumo Semanal", attendanceHistory: "Histórico de Presenças", exportViewCsv: "Exportar Vista (CSV)",
+                        allClasses: "Todas as turmas", individualStudentReport: "Relatório Individual de Aluno", selectClass: "Selecione uma turma...",
+                        selectStudent: "Selecione um aluno...", present: "Presente", absent: "Ausente", late: "Atrasado",
+                        justified: "Justificado", notes: "Observações", cancel: "Cancelar", save: "Guardar",
+                        settings: "Configurações", schoolName: "Nome da Escola", appTheme: "Tema da Aplicação",
+                        light: "Claro", dark: "Escuro", language: "Idioma", dataManagement: "Gestão de Dados",
+                        manageClassesStudents: "Gerir Turmas e Alunos", backupRestore: "Backup e Restauro",
+                        exportAllData: "Exportar Todos os Dados", importData: "Importar Dados", className: "Nome da Turma",
+                        subject: "Disciplina", teacher: "Professor", students: "Alunos", import: "Importar", add: "Adicionar",
+                        saveClass: "Guardar Turma", studentName: "Nome do Aluno", number: "Número", saveStudent: "Guardar Aluno",
+                        importStudents: "Importar Alunos", importStudentsHelp: "Cole a lista de alunos abaixo. Use o formato: Número, Nome (um aluno por linha).",
+                        preview: "Pré-visualização", confirm: "Confirmar", schoolNameUpdated: "Nome da escola atualizado.",
+                        addNewClass: "Adicionar Nova Turma", editClass: "Editar Turma", classSaved: "Turma guardada com sucesso.",
+                        deleteClass: "Apagar Turma", deleteClassConfirm: "Tem a certeza que quer apagar esta turma e todos os seus alunos? Esta ação é irreversível.",
+                        classDeleted: "Turma apagada.", addStudent: "Adicionar Aluno", editStudent: "Editar Aluno", studentSaved: "Aluno guardado com sucesso.",
+                        deleteStudent: "Apagar Aluno", deleteStudentConfirm: "Tem a certeza que quer apagar este aluno?",
+                        studentDeleted: "Aluno apagado.", ignoreExistingNum: "Número já existe, ignorar.", studentsImported: "alunos importados.",
+                        noNewStudentsToImport: "Nenhum aluno novo para importar.", noClassesFound: "Nenhuma turma encontrada. Adicione uma nas configurações.",
+                        noSubject: "Sem disciplina", noClassesAddOne: "Não existem turmas. Adicione uma para começar.",
+                        unmarked: "Não marcado", selectStatusError: "Por favor, selecione um estado.", allMarkedPresent: "Todos os alunos foram marcados como presentes.",
+                        presents: "Presentes", absences: "Faltas", lates: "Atrasos", attendanceRate: "Taxa de Presença",
+                        noRecordsFound: "Nenhum registo encontrado para os filtros selecionados.", reportFor: "Relatório para",
+                        noRecordsInPeriod: "Nenhum registo para este aluno no período selecionado.", selectStudentToExport: "Selecione um aluno para exportar o relatório.",
+                        noDataToExport: "Não existem dados para exportar.", exportComplete: "Exportação concluída.", backupCreated: "Backup criado com sucesso.",
+                        backupError: "Ocorreu um erro ao criar o backup.", restoreData: "Restaurar Dados",
+                        restoreDataConfirm: "Isto irá substituir todos os dados atuais. Tem a certeza?",
+                        restoreErrorInvalidFile: "Erro ao restaurar. Ficheiro de backup inválido ou corrompido.",
+                        restoreSuccess: "Dados restaurados com sucesso. A aplicação será recarregada.", restoreFatalError: "Ocorreu um erro fatal durante o restauro."
+                    },
+                    en: {
+                        loading: "Loading...", appTitle: "Attendance Register", totalStudents: "Total Students",
+                        presentToday: "Present Today", absentToday: "Absent Today", myClasses: "My Classes",
+                        quickAccess: "Quick Access", reports: "Reports", history: "History", studentReport: "Student Report",
+                        markAllPresent: "Mark All Present", manageClasses: "Manage Classes", addClass: "Add Class",
+                        weeklyReports: "Weekly Reports", exportCsv: "Export (CSV)", weekStats: "Week Statistics",
+                        weeklySummary: "Weekly Summary", attendanceHistory: "Attendance History", exportViewCsv: "Export View (CSV)",
+                        allClasses: "All classes", individualStudentReport: "Individual Student Report", selectClass: "Select a class...",
+                        selectStudent: "Select a student...", present: "Present", absent: "Absent", late: "Late",
+                        justified: "Justified", notes: "Notes", cancel: "Cancel", save: "Save",
+                        settings: "Settings", schoolName: "School Name", appTheme: "App Theme",
+                        light: "Light", dark: "Dark", language: "Language", dataManagement: "Data Management",
+                        manageClassesStudents: "Manage Classes and Students", backupRestore: "Backup & Restore",
+                        exportAllData: "Export All Data", importData: "Import Data", className: "Class Name",
+                        subject: "Subject", teacher: "Teacher", students: "Students", import: "Import", add: "Add",
+                        saveClass: "Save Class", studentName: "Student Name", number: "Number", saveStudent: "Save Student",
+                        importStudents: "Import Students", importStudentsHelp: "Paste the list of students below. Use the format: Number, Name (one student per line).",
+                        preview: "Preview", confirm: "Confirm", schoolNameUpdated: "School name updated.",
+                        addNewClass: "Add New Class", editClass: "Edit Class", classSaved: "Class saved successfully.",
+                        deleteClass: "Delete Class", deleteClassConfirm: "Are you sure you want to delete this class and all its students? This action is irreversible.",
+                        classDeleted: "Class deleted.", addStudent: "Add Student", editStudent: "Edit Student", studentSaved: "Student saved successfully.",
+                        deleteStudent: "Delete Student", deleteStudentConfirm: "Are you sure you want to delete this student?",
+                        studentDeleted: "Student deleted.", ignoreExistingNum: "Number already exists, ignoring.", studentsImported: "students imported.",
+                        noNewStudentsToImport: "No new students to import.", noClassesFound: "No classes found. Add one in the settings.",
+                        noSubject: "No subject", noClassesAddOne: "No classes exist. Add one to get started.",
+                        unmarked: "Unmarked", selectStatusError: "Please select a status.", allMarkedPresent: "All students have been marked as present.",
+                        presents: "Presents", absences: "Absences", lates: "Lates", attendanceRate: "Attendance Rate",
+                        noRecordsFound: "No records found for the selected filters.", reportFor: "Report for",
+                        noRecordsInPeriod: "No records for this student in the selected period.", selectStudentToExport: "Select a student to export the report.",
+                        noDataToExport: "No data to export.", exportComplete: "Export complete.", backupCreated: "Backup created successfully.",
+                        backupError: "An error occurred while creating the backup.", restoreData: "Restore Data",
+                        restoreDataConfirm: "This will overwrite all current data. Are you sure?",
+                        restoreErrorInvalidFile: "Error restoring. Invalid or corrupt backup file.",
+                        restoreSuccess: "Data restored successfully. The application will now reload.", restoreFatalError: "A fatal error occurred during the restore."
+                    },
+                    es: {
+                        loading: "Cargando...", appTitle: "Registro de Asistencia", totalStudents: "Total de Alumnos",
+                        presentToday: "Presentes Hoy", absentToday: "Ausentes Hoy", myClasses: "Mis Clases",
+                        quickAccess: "Acceso Rápido", reports: "Informes", history: "Historial", studentReport: "Informe de Alumno",
+                        markAllPresent: "Marcar Todos Presentes", manageClasses: "Gestionar Clases", addClass: "Añadir Clase",
+                        weeklyReports: "Informes Semanales", exportCsv: "Exportar (CSV)", weekStats: "Estadísticas de la Semana",
+                        weeklySummary: "Resumen Semanal", attendanceHistory: "Historial de Asistencia", exportViewCsv: "Exportar Vista (CSV)",
+                        allClasses: "Todas las clases", individualStudentReport: "Informe Individual de Alumno", selectClass: "Seleccione una clase...",
+                        selectStudent: "Seleccione un alumno...", present: "Presente", absent: "Ausente", late: "Tarde",
+                        justified: "Justificado", notes: "Notas", cancel: "Cancelar", save: "Guardar",
+                        settings: "Configuración", schoolName: "Nombre de la Escuela", appTheme: "Tema de la Aplicación",
+                        light: "Claro", dark: "Oscuro", language: "Idioma", dataManagement: "Gestión de Datos",
+                        manageClassesStudents: "Gestionar Clases y Alumnos", backupRestore: "Copia de Seguridad y Restauración",
+                        exportAllData: "Exportar Todos los Datos", importData: "Importar Datos", className: "Nombre de la Clase",
+                        subject: "Asignatura", teacher: "Profesor", students: "Alumnos", import: "Importar", add: "Añadir",
+                        saveClass: "Guardar Clase", studentName: "Nombre del Alumno", number: "Número", saveStudent: "Guardar Alumno",
+                        importStudents: "Importar Alumnos", importStudentsHelp: "Pegue la lista de alumnos a continuación. Use el formato: Número, Nombre (un alumno por línea).",
+                        preview: "Vista Previa", confirm: "Confirmar", schoolNameUpdated: "Nombre de la escuela actualizado.",
+                        addNewClass: "Añadir Nueva Clase", editClass: "Editar Clase", classSaved: "Clase guardada con éxito.",
+                        deleteClass: "Eliminar Clase", deleteClassConfirm: "¿Está seguro de que quiere eliminar esta clase y todos sus alumnos? Esta acción es irreversible.",
+                        classDeleted: "Clase eliminada.", addStudent: "Añadir Alumno", editStudent: "Editar Alumno", studentSaved: "Alumno guardado con éxito.",
+                        deleteStudent: "Eliminar Alumno", deleteStudentConfirm: "¿Está seguro de que quiere eliminar a este alumno?",
+                        studentDeleted: "Alumno eliminado.", ignoreExistingNum: "El número ya existe, se ignora.", studentsImported: "alumnos importados.",
+                        noNewStudentsToImport: "No hay nuevos alumnos para importar.", noClassesFound: "No se encontraron clases. Añada una en la configuración.",
+                        noSubject: "Sin asignatura", noClassesAddOne: "No existen clases. Añada una para empezar.",
+                        unmarked: "Sin marcar", selectStatusError: "Por favor, seleccione un estado.", allMarkedPresent: "Todos los alumnos han sido marcados como presentes.",
+                        presents: "Presentes", absences: "Ausencias", lates: "Retrasos", attendanceRate: "Tasa de Asistencia",
+                        noRecordsFound: "No se encontraron registros para los filtros seleccionados.", reportFor: "Informe para",
+                        noRecordsInPeriod: "No hay registros para este alumno en el período seleccionado.", selectStudentToExport: "Seleccione un alumno para exportar el informe.",
+                        noDataToExport: "No hay datos para exportar.", exportComplete: "Exportación completa.", backupCreated: "Copia de seguridad creada con éxito.",
+                        backupError: "Ocurrió un error al crear la copia de seguridad.", restoreData: "Restaurar Datos",
+                        restoreDataConfirm: "Esto sobrescribirá todos los datos actuales. ¿Está seguro?",
+                        restoreErrorInvalidFile: "Error al restaurar. Archivo de copia de seguridad inválido o corrupto.",
+                        restoreSuccess: "Datos restaurados con éxito. La aplicación se recargará.", restoreFatalError: "Ocurrió un error fatal durante la restauración."
+                    }
+                };
+
                 this.defaultData = {
                     "turmas": [
                         { "id": "7a", "nome": "7º A", "disciplina": "Matemática", "professor": "Prof. Ana Silva", "alunos": [
@@ -523,7 +642,10 @@
             async initDB() {
                 return new Promise((resolve, reject) => {
                     const request = indexedDB.open('AttendanceAppDB_v3', 4);
-                    request.onerror = (e) => reject("Erro ao abrir a base de dados: " + e.target.errorCode);
+                    request.onerror = (e) => {
+                        console.error("Database error: ", e.target.errorCode);
+                        reject("Erro ao abrir a base de dados: " + e.target.errorCode);
+                    };
                     request.onsuccess = (e) => { this.db = e.target.result; resolve(); };
                     request.onupgradeneeded = (e) => {
                         const db = e.target.result;
@@ -531,11 +653,14 @@
                         if (!db.objectStoreNames.contains('attendance')) {
                             const store = db.createObjectStore('attendance', { keyPath: 'id' });
                             store.createIndex('date', 'date', { unique: false });
+                            store.createIndex('classId', 'classId', { unique: false });
+                            store.createIndex('studentId', 'studentId', { unique: false });
                         }
                     };
                 });
             }
 
+            // --- EVENT LISTENERS ---
             setupEventListeners() {
                 // Navigation
                 document.getElementById('back-btn').addEventListener('click', () => this.showView('dashboard'));
@@ -550,13 +675,16 @@
                 // Class Grid & Attendance
                 document.getElementById('classes-grid').addEventListener('click', (e) => {
                     const card = e.target.closest('.class-card');
-                    if (card) this.openClass(this.data.turmas.find(t => t.id === card.dataset.classId));
+                    if (card) this.openClass(card.dataset.classId);
                 });
                 const studentList = document.getElementById('students-list');
                 studentList.addEventListener('click', (e) => {
-                    if (this.isSwiping) return;
+                    if (this.isSwiping) {
+                        this.isSwiping = false;
+                        return;
+                    }
                     const item = e.target.closest('.student-item');
-                    if (item) this.openStudentModal(this.currentClass.alunos.find(a => a.id === item.dataset.studentId));
+                    if (item) this.openStudentModal(item.dataset.studentId);
                 });
                 studentList.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
                 studentList.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
@@ -569,6 +697,9 @@
                 document.getElementById('save-school-name-btn').addEventListener('click', () => this.saveSchoolName());
                 document.getElementById('theme-light-btn').addEventListener('click', () => this.setTheme('light'));
                 document.getElementById('theme-dark-btn').addEventListener('click', () => this.setTheme('dark'));
+                document.getElementById('lang-pt-btn').addEventListener('click', () => this.setLanguage('pt'));
+                document.getElementById('lang-en-btn').addEventListener('click', () => this.setLanguage('en'));
+                document.getElementById('lang-es-btn').addEventListener('click', () => this.setLanguage('es'));
                 document.getElementById('manage-classes-btn').addEventListener('click', () => { this.closeSettingsModal(); this.showView('management'); });
                 
                 document.getElementById('modal-close-btn').addEventListener('click', () => this.closeStudentModal());
@@ -628,6 +759,7 @@
                 this.setTheme(localStorage.getItem('attendanceAppTheme') || 'light');
                 this.schoolName = localStorage.getItem('attendanceAppSchoolName') || 'A Minha Escola';
                 document.getElementById('page-subtitle').textContent = this.schoolName;
+                this.setLanguage(localStorage.getItem('attendanceAppLang') || 'pt');
             }
             saveSchoolName() {
                 const newName = document.getElementById('school-name-input').value.trim();
@@ -635,7 +767,7 @@
                     this.schoolName = newName;
                     localStorage.setItem('attendanceAppSchoolName', newName);
                     document.getElementById('page-subtitle').textContent = this.schoolName;
-                    this.showToast('Nome da escola atualizado!');
+                    this.showToast(this.getTranslation('schoolNameUpdated'));
                 }
             }
             async loadAppDataFromDB() {
@@ -652,12 +784,30 @@
                 this.updateDashboardStats();
             }
 
-            // --- THEME & MODALS ---
+            // --- THEME, LANGUAGE & MODALS ---
             setTheme(theme) {
                 document.documentElement.setAttribute('data-color-scheme', theme);
                 localStorage.setItem('attendanceAppTheme', theme);
                 document.getElementById('theme-light-btn').classList.toggle('active', theme === 'light');
                 document.getElementById('theme-dark-btn').classList.toggle('active', theme === 'dark');
+            }
+            setLanguage(lang) {
+                this.currentLanguage = lang;
+                localStorage.setItem('attendanceAppLang', lang);
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.dataset.translate;
+                    el.textContent = this.getTranslation(key);
+                });
+                document.documentElement.lang = lang.split('-')[0];
+                
+                document.getElementById('lang-pt-btn').classList.toggle('active', lang === 'pt');
+                document.getElementById('lang-en-btn').classList.toggle('active', lang === 'en');
+                document.getElementById('lang-es-btn').classList.toggle('active', lang === 'es');
+                
+                this.renderCurrentView(); // Re-render to update dynamic content
+            }
+            getTranslation(key) {
+                return this.translations[this.currentLanguage]?.[key] || this.translations['pt'][key] || key;
             }
             openSettingsModal() {
                 document.getElementById('school-name-input').value = this.schoolName;
@@ -670,7 +820,7 @@
                 const isNew = !classId;
                 const form = document.getElementById('class-editor-form');
                 form.reset();
-                document.getElementById('class-editor-title').textContent = isNew ? 'Adicionar Nova Turma' : 'Editar Turma';
+                document.getElementById('class-editor-title').textContent = isNew ? this.getTranslation('addNewClass') : this.getTranslation('editClass');
                 document.getElementById('edit-class-id').value = this.currentClassId;
                 
                 if (!isNew) {
@@ -688,7 +838,7 @@
                 const isNew = !studentId;
                 const form = document.getElementById('student-editor-form');
                 form.reset();
-                document.getElementById('student-editor-title').textContent = isNew ? 'Adicionar Aluno' : 'Editar Aluno';
+                document.getElementById('student-editor-title').textContent = isNew ? this.getTranslation('addStudent') : this.getTranslation('editStudent');
                 document.getElementById('edit-student-id').value = isNew ? `student_${Date.now()}` : studentId;
                 
                 if (!isNew) {
@@ -724,14 +874,14 @@
                 else this.data.turmas.push(newClassData);
                 await this.saveAppDataToDB();
                 this.closeClassEditor();
-                this.showToast('Turma guardada!');
+                this.showToast(this.getTranslation('classSaved'));
             }
             async deleteClass(classId) {
-                const confirmed = await this.showConfirm('Apagar Turma', 'Tem a certeza? Esta ação é irreversível.');
+                const confirmed = await this.showConfirm(this.getTranslation('deleteClass'), this.getTranslation('deleteClassConfirm'));
                 if (confirmed) {
                     this.data.turmas = this.data.turmas.filter(t => t.id !== classId);
                     await this.saveAppDataToDB();
-                    this.showToast('Turma apagada.');
+                    this.showToast(this.getTranslation('classDeleted'));
                 }
             }
             async saveStudent(event) {
@@ -750,17 +900,17 @@
                 await this.saveAppDataToDB();
                 this.renderClassEditorStudentList();
                 this.closeStudentEditor();
-                this.showToast('Aluno guardado!');
+                this.showToast(this.getTranslation('studentSaved'));
             }
             async deleteStudent(studentId) {
                 const turma = this.data.turmas.find(t => t.id === this.currentClassId);
                 if (!turma) return;
-                const confirmed = await this.showConfirm('Apagar Aluno', 'Tem a certeza?');
+                const confirmed = await this.showConfirm(this.getTranslation('deleteStudent'), this.getTranslation('deleteStudentConfirm'));
                 if(confirmed) {
                     turma.alunos = turma.alunos.filter(a => a.id != studentId);
                     await this.saveAppDataToDB();
                     this.renderClassEditorStudentList();
-                    this.showToast('Aluno apagado.');
+                    this.showToast(this.getTranslation('studentDeleted'));
                 }
             }
 
@@ -781,7 +931,7 @@
 
                 let newStudentsCount = 0;
                 lines.forEach(line => {
-                    const parts = line.split(/[,;\t]/); // Split by comma, semicolon or tab
+                    const parts = line.split(/[,;\t]/);
                     if (parts.length < 2) return;
                     
                     const numero = parseInt(parts[0].trim(), 10);
@@ -790,11 +940,12 @@
                     if (!isNaN(numero) && nome) {
                         const item = document.createElement('div');
                         item.className = 'management-item';
-                        let status = 'Adicionar';
+                        let status;
                         if (existingNumbers.has(numero)) {
-                            status = 'Ignorar (nº já existe)';
+                            status = this.getTranslation('ignoreExistingNum');
                             item.style.opacity = '0.5';
                         } else {
+                            status = `✔️ ${this.getTranslation('add')}`;
                             newStudentsCount++;
                         }
                         item.innerHTML = `<span><strong>${numero}.</strong> ${nome}</span> <span>${status}</span>`;
@@ -802,7 +953,7 @@
                     }
                 });
                 previewWrapper.classList.remove('hidden');
-                document.getElementById('import-students-confirm-btn').textContent = `Importar ${newStudentsCount} Aluno(s)`;
+                document.querySelector('#import-students-confirm-btn span').textContent = `${this.getTranslation('import')} (${newStudentsCount})`;
             }
 
             async handleStudentImport() {
@@ -823,7 +974,7 @@
 
                     if (!isNaN(numero) && nome && !existingNumbers.has(numero)) {
                         turma.alunos.push({ id: `student_${Date.now()}_${numero}`, numero, nome });
-                        existingNumbers.add(numero); // Add to set to avoid duplicates within the same import
+                        existingNumbers.add(numero);
                         importedCount++;
                     }
                 });
@@ -831,9 +982,9 @@
                 if (importedCount > 0) {
                     await this.saveAppDataToDB();
                     this.renderClassEditorStudentList();
-                    this.showToast(`${importedCount} aluno(s) importado(s) com sucesso!`);
+                    this.showToast(`${importedCount} ${this.getTranslation('studentsImported')}`);
                 } else {
-                    this.showToast('Nenhum aluno novo para importar.');
+                    this.showToast(this.getTranslation('noNewStudentsToImport'));
                 }
                 this.closeStudentImporter();
             }
@@ -858,8 +1009,17 @@
                 if (view) view.classList.add('active');
                 
                 document.getElementById('back-btn').classList.toggle('hidden', viewName === 'dashboard');
-                const titles = { dashboard: 'Registo de Presenças', attendance: this.currentClass?.nome, management: 'Gestão de Turmas', reports: 'Relatórios', history: 'Histórico', 'individual-report': 'Relatório de Aluno' };
-                document.getElementById('page-title').textContent = titles[viewName] || 'Registo';
+                
+                let title = '';
+                if (viewName === 'attendance') {
+                    const currentClass = this.data.turmas.find(t => t.id === this.currentClassId);
+                    title = currentClass ? currentClass.nome : '';
+                } else {
+                    const titleKey = { dashboard: 'appTitle', management: 'manageClasses', reports: 'reports', history: 'history', 'individual-report': 'studentReport' }[viewName] || 'appTitle';
+                    title = this.getTranslation(titleKey);
+                }
+                document.getElementById('page-title').textContent = title;
+                
                 this.renderCurrentView();
             }
             
@@ -868,14 +1028,14 @@
                 const grid = document.getElementById('classes-grid');
                 grid.innerHTML = '';
                 if (!this.data.turmas || this.data.turmas.length === 0) {
-                    grid.innerHTML = '<p>Nenhuma turma encontrada. Adicione uma nas configurações (⚙️).</p>';
+                    grid.innerHTML = `<p>${this.getTranslation('noClassesFound')}</p>`;
                     return;
                 }
                 this.data.turmas.forEach(turma => {
                     const card = document.createElement('div');
                     card.className = 'class-card';
                     card.dataset.classId = turma.id;
-                    card.innerHTML = `<h3>${turma.nome}</h3><p>${turma.disciplina || 'Sem disciplina'}</p>`;
+                    card.innerHTML = `<h3>${turma.nome}</h3><p>${turma.disciplina || this.getTranslation('noSubject')}</p>`;
                     grid.appendChild(card);
                 });
             }
@@ -885,27 +1045,22 @@
                 document.getElementById('total-students').textContent = totalStudents;
 
                 const today = new Date().toISOString().split('T')[0];
-                let presentToday = 0;
-                let absentToday = 0;
-
-                this.attendanceData.forEach(record => {
-                    if (record.date === today) {
-                        if (record.status === 'presente') presentToday++;
-                        else if (record.status === 'ausente') absentToday++;
-                    }
-                });
+                const todaysRecords = this.attendanceData.filter(record => record.date === today);
+                
+                const presentToday = new Set(todaysRecords.filter(r => r.status === 'presente').map(r => r.studentId)).size;
+                const absentToday = new Set(todaysRecords.filter(r => r.status === 'ausente').map(r => r.studentId)).size;
 
                 document.getElementById('present-today').textContent = presentToday;
                 document.getElementById('absent-today').textContent = absentToday;
             }
 
-            openClass(turma) { this.currentClass = turma; this.showView('attendance'); }
+            openClass(classId) { this.currentClassId = classId; this.showView('attendance'); }
             
             quickAttendance() {
                 if (this.data.turmas && this.data.turmas.length > 0) {
-                    this.openClass(this.data.turmas[0]);
+                    this.openClass(this.data.turmas[0].id);
                 } else {
-                    this.showToast('Nenhuma turma encontrada. Adicione uma primeiro.');
+                    this.showToast(this.getTranslation('noClassesAddOne'));
                 }
             }
 
@@ -915,7 +1070,7 @@
                 this.data.turmas.forEach(turma => {
                     const item = document.createElement('div');
                     item.className = 'management-item';
-                    item.innerHTML = `<span>${turma.nome} (${turma.alunos.length} alunos)</span><div class="management-item-actions"><button class="btn btn--outline btn--sm edit-class-btn" data-class-id="${turma.id}">Editar</button><button class="btn btn--danger btn--sm delete-class-btn" data-class-id="${turma.id}">Apagar</button></div>`;
+                    item.innerHTML = `<span>${turma.nome} (${turma.alunos.length} ${this.getTranslation('students')})</span><div class="management-item-actions"><button class="btn btn--outline btn--sm edit-class-btn" data-class-id="${turma.id}">${this.getTranslation('edit')}</button><button class="btn btn--danger btn--sm delete-class-btn" data-class-id="${turma.id}">${this.getTranslation('delete')}</button></div>`;
                     list.appendChild(item);
                 });
             }
@@ -927,7 +1082,7 @@
                 turma.alunos.sort((a,b) => a.numero - b.numero).forEach(aluno => {
                     const item = document.createElement('div');
                     item.className = 'management-item';
-                    item.innerHTML = `<span><strong>${aluno.numero}.</strong> ${aluno.nome}</span><div class="management-item-actions"><button type="button" class="btn btn--outline btn--sm edit-student-btn" data-student-id="${aluno.id}">Editar</button><button type="button" class="btn btn--danger btn--sm delete-student-btn" data-student-id="${aluno.id}">Apagar</button></div>`;
+                    item.innerHTML = `<span><strong>${aluno.numero}.</strong> ${aluno.nome}</span><div class="management-item-actions"><button type="button" class="btn btn--outline btn--sm edit-student-btn" data-student-id="${aluno.id}">${this.getTranslation('edit')}</button><button type="button" class="btn btn--danger btn--sm delete-student-btn" data-student-id="${aluno.id}">${this.getTranslation('delete')}</button></div>`;
                     list.appendChild(item);
                 });
             }
@@ -936,14 +1091,15 @@
             renderStudentsList() {
                 const container = document.getElementById('students-list');
                 container.innerHTML = '';
-                if (!this.currentClass) return;
+                const currentClass = this.data.turmas.find(t => t.id === this.currentClassId);
+                if (!currentClass) return;
 
-                document.getElementById('attendance-class-name').textContent = this.currentClass.nome;
+                document.getElementById('attendance-class-name').textContent = currentClass.nome;
                 
                 const today = new Date().toISOString().split('T')[0];
-                const todaysRecords = this.attendanceData.filter(r => r.date === today && r.classId === this.currentClass.id);
+                const todaysRecords = this.attendanceData.filter(r => r.date === today && r.classId === this.currentClassId);
 
-                this.currentClass.alunos.sort((a,b) => a.numero - b.numero).forEach(aluno => {
+                currentClass.alunos.sort((a,b) => a.numero - b.numero).forEach(aluno => {
                     const key = this.getAttendanceKey(aluno.id);
                     const attendance = todaysRecords.find(r => r.id === key);
                     const statusInfo = this.getStatusInfo(attendance?.status);
@@ -966,8 +1122,10 @@
                     container.appendChild(item);
                 });
             }
-            openStudentModal(student) {
-                this.currentStudent = student;
+            openStudentModal(studentId) {
+                this.currentStudentId = studentId;
+                const currentClass = this.data.turmas.find(t => t.id === this.currentClassId);
+                const student = currentClass.alunos.find(a => a.id === studentId);
                 document.getElementById('modal-student-name').textContent = student.nome;
                 
                 const key = this.getAttendanceKey(student.id);
@@ -985,18 +1143,18 @@
             }
             async saveStudentAttendance() {
                 const selectedBtn = document.querySelector('#modal-attendance-options .attendance-btn.selected');
-                if (!selectedBtn) { this.showToast('Selecione um estado.'); return; }
+                if (!selectedBtn) { this.showToast(this.getTranslation('selectStatusError')); return; }
                 
                 const status = selectedBtn.dataset.status;
                 const note = document.getElementById('student-note').value.trim();
                 
-                await this.markStudentAttendance(this.currentStudent, status, note);
+                await this.markStudentAttendance(this.currentStudentId, status, note);
                 this.closeStudentModal();
             }
             
-            async markStudentAttendance(student, status, note = '', shouldRender = true) {
-                const key = this.getAttendanceKey(student.id);
-                const record = { id: key, date: new Date().toISOString().split('T')[0], classId: this.currentClass.id, studentId: student.id, status, note };
+            async markStudentAttendance(studentId, status, note = '', shouldRender = true) {
+                const key = this.getAttendanceKey(studentId);
+                const record = { id: key, date: new Date().toISOString().split('T')[0], classId: this.currentClassId, studentId, status, note };
 
                 const recordIndex = this.attendanceData.findIndex(r => r.id === key);
                 if (recordIndex > -1) this.attendanceData[recordIndex] = record;
@@ -1011,31 +1169,32 @@
             }
 
             async markAllPresent() {
-                if (!this.currentClass) return;
-                const promises = this.currentClass.alunos.map(student => {
+                const currentClass = this.data.turmas.find(t => t.id === this.currentClassId);
+                if (!currentClass) return;
+                const promises = currentClass.alunos.map(student => {
                     const key = this.getAttendanceKey(student.id);
                     if (!this.attendanceData.some(r => r.id === key)) {
-                        return this.markStudentAttendance(student, 'presente', '', false); // Don't re-render for each
+                        return this.markStudentAttendance(student.id, 'presente', '', false); // Don't re-render for each
                     }
                     return Promise.resolve();
                 });
 
                 await Promise.all(promises);
                 this.renderStudentsList();
-                this.showToast('Todos marcados como presentes.');
+                this.showToast(this.getTranslation('allMarkedPresent'));
                 this.updateDashboardStats();
             }
             getAttendanceKey(studentId) {
                 const today = new Date().toISOString().split('T')[0];
-                return `${today}-${this.currentClass.id}-${studentId}`;
+                return `${today}-${this.currentClassId}-${studentId}`;
             }
             getStatusInfo(status) {
                 switch (status) {
-                    case 'presente': return { icon: '✓', text: 'Presente' };
-                    case 'ausente': return { icon: '✗', text: 'Ausente' };
-                    case 'atrasado': return { icon: '⏰', text: 'Atrasado' };
-                    case 'justificado': return { icon: '📄', text: 'Justificado' };
-                    default: return { icon: '○', text: 'Por marcar' };
+                    case 'presente': return { icon: '&#10003;', text: this.getTranslation('present') };
+                    case 'ausente': return { icon: '&#10007;', text: this.getTranslation('absent') };
+                    case 'atrasado': return { icon: '&#9200;', text: this.getTranslation('late') };
+                    case 'justificado': return { icon: '&#128196;', text: this.getTranslation('justified') };
+                    default: return { icon: '&#9675;', text: this.getTranslation('unmarked') };
                 }
             }
 
@@ -1045,48 +1204,38 @@
             showIndividualReport() { this.showView('individual-report'); }
 
             renderReportsView() {
-                const now = new Date();
-                const dayOfWeek = now.getDay();
-                const diff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
-                const startOfWeek = new Date(now.setDate(diff));
-                
-                const year = startOfWeek.getFullYear();
-                const week = Math.ceil((((startOfWeek - new Date(year, 0, 1)) / 86400000) + 1) / 7);
-
-                const weekString = `${year}-W${String(week).padStart(2, '0')}`;
-                document.getElementById('week-picker').value = weekString;
-                
-                this.updateWeeklyReport(weekString);
+                document.getElementById('week-picker').value = this.getISOWeekAndYear(new Date());
+                this.updateWeeklyReport(document.getElementById('week-picker').value);
             }
             
             updateWeeklyReport(weekString) {
                 if (!weekString) return;
                 const [year, week] = weekString.split('-W').map(Number);
-                const simple = new Date(year, 0, 1 + (week - 1) * 7);
-                const dow = simple.getDay();
-                const startOfWeek = simple;
-                if (dow <= 4) startOfWeek.setDate(simple.getDate() - simple.getDay() + 1);
-                else startOfWeek.setDate(simple.getDate() + 8 - simple.getDay());
+                const startDate = this.getDateOfISOWeek(week, year);
 
-                this.createWeeklyChart(startOfWeek);
-                this.createWeeklySummary(startOfWeek);
+                this.createWeeklyChart(startDate);
+                this.createWeeklySummary(startDate);
             }
 
             createWeeklyChart(startDate) {
                 const labels = [];
-                const weekData = [];
+                const weekData = { presente: [], ausente: [] };
+                
                 for (let i = 0; i < 7; i++) {
                     const date = new Date(startDate);
                     date.setDate(startDate.getDate() + i);
                     const dateStr = date.toISOString().split('T')[0];
-                    labels.push(date.toLocaleDateString('pt-PT', { weekday: 'short' }));
-                    const present = this.attendanceData.filter(att => att.date === dateStr && att.status === 'presente').length;
-                    weekData.push(present);
+                    labels.push(date.toLocaleDateString(this.currentLanguage, { weekday: 'short' }));
+                    weekData.presente.push(this.attendanceData.filter(att => att.date === dateStr && att.status === 'presente').length);
+                    weekData.ausente.push(this.attendanceData.filter(att => att.date === dateStr && att.status === 'ausente').length);
                 }
-                this.createChart('weekly-chart', 'line', {
+                this.createChart('weekly-chart', 'bar', {
                     labels,
-                    datasets: [{ label: 'Presenças', data: weekData, borderColor: 'var(--color-primary)', backgroundColor: 'rgba(33, 128, 141, 0.1)', fill: true, tension: 0.4 }]
-                }, { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, color: 'var(--color-text-secondary)' } }, x: { ticks: { color: 'var(--color-text-secondary)' } } } });
+                    datasets: [
+                        { label: this.getTranslation('presents'), data: weekData.presente, backgroundColor: 'rgba(76, 175, 80, 0.7)' },
+                        { label: this.getTranslation('absences'), data: weekData.ausente, backgroundColor: 'rgba(244, 67, 54, 0.7)' }
+                    ]
+                }, { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, color: 'var(--color-text-secondary)' } }, x: { ticks: { color: 'var(--color-text-secondary)' } } } });
             }
 
             createWeeklySummary(startDate) {
@@ -1103,27 +1252,30 @@
                         }
                     });
                 }
-                const total = totalPresent + totalAbsent + totalLate;
-                const attendanceRate = total > 0 ? Math.round((totalPresent / total) * 100) : 0;
+                const totalAttendable = totalPresent + totalAbsent + totalLate;
+                const attendanceRate = totalAttendable > 0 ? Math.round((totalPresent / totalAttendable) * 100) : 0;
                 document.getElementById('weekly-summary').innerHTML = `
-                    <div class="summary-item"><div class="summary-number">${totalPresent}</div><div class="summary-label">Presenças</div></div>
-                    <div class="summary-item"><div class="summary-number">${totalAbsent}</div><div class="summary-label">Ausências</div></div>
-                    <div class="summary-item"><div class="summary-number">${totalLate}</div><div class="summary-label">Atrasos</div></div>
-                    <div class="summary-item"><div class="summary-number">${attendanceRate}%</div><div class="summary-label">Taxa de Presença</div></div>
+                    <div class="summary-item"><div class="summary-number">${totalPresent}</div><div class="summary-label">${this.getTranslation('presents')}</div></div>
+                    <div class="summary-item"><div class="summary-number">${totalAbsent}</div><div class="summary-label">${this.getTranslation('absences')}</div></div>
+                    <div class="summary-item"><div class="summary-number">${totalLate}</div><div class="summary-label">${this.getTranslation('lates')}</div></div>
+                    <div class="summary-item"><div class="summary-number">${attendanceRate}%</div><div class="summary-label">${this.getTranslation('attendanceRate')}</div></div>
                 `;
             }
 
             renderHistoryView() {
                 const classFilter = document.getElementById('class-filter');
-                if (classFilter.options.length <= 1) {
-                    this.data.turmas.forEach(turma => {
-                        const option = document.createElement('option');
-                        option.value = turma.id;
-                        option.textContent = turma.nome;
-                        classFilter.appendChild(option);
-                    });
+                const currentVal = classFilter.value;
+                classFilter.innerHTML = `<option value="">${this.getTranslation('allClasses')}</option>`;
+                this.data.turmas.forEach(turma => {
+                    const option = document.createElement('option');
+                    option.value = turma.id;
+                    option.textContent = turma.nome;
+                    classFilter.appendChild(option);
+                });
+                classFilter.value = currentVal;
+                if(!document.getElementById('date-filter').value) {
+                    document.getElementById('date-filter').valueAsDate = new Date();
                 }
-                document.getElementById('date-filter').valueAsDate = new Date();
                 this.filterHistory();
             }
 
@@ -1152,7 +1304,7 @@
                 const sortedGroups = Object.values(groupedRecords).sort((a, b) => new Date(b.date) - new Date(a.date));
                 
                 if (sortedGroups.length === 0) {
-                    historyList.innerHTML = '<p style="text-align: center; padding: 2rem;">Nenhum registo encontrado.</p>';
+                    historyList.innerHTML = `<p style="text-align: center; padding: 2rem;">${this.getTranslation('noRecordsFound')}</p>`;
                     return;
                 }
 
@@ -1165,11 +1317,11 @@
                     item.innerHTML = `
                         <div class="history-header-info">
                             <h4>${group.className}</h4>
-                            <span class="history-date">${new Date(group.date).toLocaleDateString('pt-PT')}</span>
+                            <span class="history-date">${new Date(group.date + 'T00:00:00').toLocaleDateString(this.currentLanguage)}</span>
                         </div>
                         <div class="history-stats">
-                            <div class="history-stat"><span style="color: #4CAF50;">✓</span> ${present} presentes</div>
-                            <div class="history-stat"><span style="color: #F44336;">✗</span> ${absent} ausentes</div>
+                            <div class="history-stat"><span style="color: #4CAF50;">&#10003;</span> ${present} ${this.getTranslation('presents')}</div>
+                            <div class="history-stat"><span style="color: #F44336;">&#10007;</span> ${absent} ${this.getTranslation('absences')}</div>
                         </div>
                     `;
                     historyList.appendChild(item);
@@ -1178,7 +1330,7 @@
 
             renderIndividualReportView() {
                 const classFilter = document.getElementById('individual-report-class-filter');
-                classFilter.innerHTML = '<option value="">Selecione uma turma...</option>';
+                classFilter.innerHTML = `<option value="">${this.getTranslation('selectClass')}</option>`;
                 this.data.turmas.forEach(turma => {
                     const option = document.createElement('option');
                     option.value = turma.id;
@@ -1198,7 +1350,7 @@
 
             populateIndividualStudentFilter(classId) {
                 const studentFilter = document.getElementById('individual-report-student-filter');
-                studentFilter.innerHTML = '<option value="">Selecione um aluno...</option>';
+                studentFilter.innerHTML = `<option value="">${this.getTranslation('selectStudent')}</option>`;
                 studentFilter.disabled = true;
                 if (!classId) return;
 
@@ -1228,7 +1380,7 @@
                 }
                 
                 const student = this.data.turmas.find(t => t.id === classId)?.alunos.find(a => a.id === studentId);
-                document.getElementById('individual-report-student-name').textContent = `Relatório de ${student.nome}`;
+                document.getElementById('individual-report-student-name').textContent = `${this.getTranslation('reportFor')} ${student.nome}`;
 
                 const records = this.attendanceData.filter(r => {
                     return r.studentId === studentId && r.date >= startDate && r.date <= endDate;
@@ -1246,24 +1398,24 @@
                 const attendanceRate = total > 0 ? Math.round((present / total) * 100) : 0;
                 
                 document.getElementById('individual-report-summary').innerHTML = `
-                    <div class="summary-item"><div class="summary-number">${present}</div><div class="summary-label">Presenças</div></div>
-                    <div class="summary-item"><div class="summary-number">${absent}</div><div class="summary-label">Ausências</div></div>
-                    <div class="summary-item"><div class="summary-number">${late}</div><div class="summary-label">Atrasos</div></div>
-                    <div class="summary-item"><div class="summary-number">${attendanceRate}%</div><div class="summary-label">Taxa de Presença</div></div>
+                    <div class="summary-item"><div class="summary-number">${present}</div><div class="summary-label">${this.getTranslation('presents')}</div></div>
+                    <div class="summary-item"><div class="summary-number">${absent}</div><div class="summary-label">${this.getTranslation('absences')}</div></div>
+                    <div class="summary-item"><div class="summary-number">${late}</div><div class="summary-label">${this.getTranslation('lates')}</div></div>
+                    <div class="summary-item"><div class="summary-number">${attendanceRate}%</div><div class="summary-label">${this.getTranslation('attendanceRate')}</div></div>
                 `;
 
                 const listEl = document.getElementById('individual-report-list');
                 listEl.innerHTML = '';
                 if (records.length === 0) {
-                    listEl.innerHTML = '<p style="text-align: center; padding: 2rem;">Nenhum registo neste período.</p>';
+                    listEl.innerHTML = `<p style="text-align: center; padding: 2rem;">${this.getTranslation('noRecordsInPeriod')}</p>`;
                 } else {
                     records.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(record => {
                         const item = document.createElement('div');
                         item.className = 'history-item';
                         item.innerHTML = `
                             <div class="history-header-info">
-                                <h4>${new Date(record.date).toLocaleDateString('pt-PT')}</h4>
-                                <span class="history-date">${record.status}</span>
+                                <h4>${new Date(record.date + 'T00:00:00').toLocaleDateString(this.currentLanguage)}</h4>
+                                <span class="history-date">${this.getTranslation(record.status)}</span>
                             </div>
                             ${record.note ? `<p style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">${record.note}</p>` : ''}
                         `;
@@ -1297,17 +1449,12 @@
                 const weekString = document.getElementById('week-picker').value;
                 if (!weekString) return;
                 const [year, week] = weekString.split('-W').map(Number);
-                const simple = new Date(year, 0, 1 + (week - 1) * 7);
-                const dow = simple.getDay();
-                const startOfWeek = new Date(simple);
-                if (dow <= 4) startOfWeek.setDate(simple.getDate() - simple.getDay() + 1);
-                else startOfWeek.setDate(simple.getDate() + 8 - simple.getDay());
-                
+                const startOfWeek = this.getDateOfISOWeek(week, year);
                 const endOfWeek = new Date(startOfWeek);
                 endOfWeek.setDate(startOfWeek.getDate() + 6);
 
                 const records = this.attendanceData.filter(record => {
-                    const recordDate = new Date(record.date);
+                    const recordDate = new Date(record.date + 'T00:00:00');
                     return recordDate >= startOfWeek && recordDate <= endOfWeek;
                 });
                 this.exportToCSV(records, `relatorio_semana_${week}.csv`);
@@ -1320,7 +1467,7 @@
                 const endDate = document.getElementById('individual-report-end-date').value;
 
                 if (!studentId) {
-                    this.showToast('Selecione um aluno para exportar.');
+                    this.showToast(this.getTranslation('selectStudentToExport'));
                     return;
                 }
 
@@ -1334,7 +1481,7 @@
 
             exportToCSV(records, filename) {
                 if (records.length === 0) {
-                    this.showToast('Não há dados para exportar.');
+                    this.showToast(this.getTranslation('noDataToExport'));
                     return;
                 }
                 const headers = ["Data", "Turma", "Numero", "Aluno", "Estado", "Observacoes"];
@@ -1353,7 +1500,7 @@
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                this.showToast('Exportação concluída!');
+                this.showToast(this.getTranslation('exportComplete'));
             }
 
             // --- BACKUP & RESTORE ---
@@ -1362,7 +1509,8 @@
                     const backupData = {
                         settings: {
                             schoolName: this.schoolName,
-                            theme: localStorage.getItem('attendanceAppTheme') || 'light'
+                            theme: localStorage.getItem('attendanceAppTheme') || 'light',
+                            lang: this.currentLanguage || 'pt'
                         },
                         appData: this.data,
                         attendanceData: this.attendanceData
@@ -1378,10 +1526,10 @@
                     link.href = url;
                     link.click();
                     URL.revokeObjectURL(url);
-                    this.showToast('Backup criado com sucesso!');
+                    this.showToast(this.getTranslation('backupCreated'));
                 } catch (error) {
                     console.error("Erro ao criar backup:", error);
-                    this.showToast('Ocorreu um erro ao criar o backup.');
+                    this.showToast(this.getTranslation('backupError'));
                 }
             }
 
@@ -1398,8 +1546,8 @@
                         }
 
                         const confirmed = await this.showConfirm(
-                            'Restaurar Dados', 
-                            'Tem a certeza? Todos os dados atuais serão substituídos por este backup. Esta ação é irreversível.'
+                            this.getTranslation('restoreData'), 
+                            this.getTranslation('restoreDataConfirm')
                         );
 
                         if (confirmed) {
@@ -1407,7 +1555,7 @@
                         }
                     } catch (error) {
                         console.error("Erro ao restaurar dados:", error);
-                        this.showToast('Erro: Ficheiro de backup inválido ou corrompido.');
+                        this.showToast(this.getTranslation('restoreErrorInvalidFile'));
                     } finally {
                         event.target.value = null; // Reset file input
                     }
@@ -1424,6 +1572,7 @@
                     // Restore settings
                     this.schoolName = data.settings.schoolName;
                     this.setTheme(data.settings.theme);
+                    this.setLanguage(data.settings.lang);
                     localStorage.setItem('attendanceAppSchoolName', this.schoolName);
                     
                     // Restore app data (classes, students)
@@ -1441,12 +1590,12 @@
                         tx.onerror = () => reject(tx.error);
                     });
 
-                    this.showToast('Dados restaurados com sucesso! A aplicação vai recarregar.');
+                    this.showToast(this.getTranslation('restoreSuccess'));
                     setTimeout(() => window.location.reload(), 2000);
 
                 } catch (error) {
                     console.error("Falha ao executar o restauro:", error);
-                    this.showToast('Ocorreu um erro grave durante o restauro.');
+                    this.showToast(this.getTranslation('restoreFatalError'));
                 }
             }
 
@@ -1470,6 +1619,23 @@
                     okBtn.addEventListener('click', () => { cleanup(); resolve(true); }, { once: true });
                     cancelBtn.addEventListener('click', () => { cleanup(); resolve(false); }, { once: true });
                 });
+            }
+            getISOWeekAndYear(date) {
+                const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+                const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+                const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+                return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, '0')}`;
+            }
+            getDateOfISOWeek(w, y) {
+                const simple = new Date(y, 0, 1 + (w - 1) * 7);
+                const dow = simple.getDay();
+                const ISOweekStart = simple;
+                if (dow <= 4)
+                    ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+                else
+                    ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+                return ISOweekStart;
             }
             
             // --- DB HELPERS ---
@@ -1508,6 +1674,55 @@
                     tx.oncomplete = resolve;
                     tx.onerror = () => reject(tx.error);
                 });
+            }
+
+            // --- SWIPE GESTURES ---
+            handleTouchStart(e) {
+                const touch = e.touches[0];
+                this.touchStartX = touch.clientX;
+                this.touchStartY = touch.clientY;
+                this.swipedItem = e.target.closest('.student-item');
+                this.isSwiping = false;
+            }
+
+            handleTouchMove(e) {
+                if (!this.swipedItem) return;
+                const touch = e.touches[0];
+                this.touchEndX = touch.clientX;
+                this.touchEndY = touch.clientY;
+                
+                const diffX = this.touchEndX - this.touchStartX;
+                const diffY = this.touchEndY - this.touchStartY;
+
+                // Only start swiping if horizontal movement is greater than vertical
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    this.isSwiping = true;
+                    this.swipedItem.classList.add('swiping');
+                    // Only allow right swipe
+                    const translateX = Math.max(0, diffX);
+                    this.swipedItem.style.transform = `translateX(${translateX}px)`;
+                }
+            }
+
+            async handleTouchEnd(e) {
+                if (!this.swipedItem || !this.isSwiping) return;
+
+                const diffX = this.touchEndX - this.touchStartX;
+                const threshold = this.swipedItem.offsetWidth * 0.4; // 40% of item width
+
+                if (diffX > threshold) {
+                    // Swipe right successful
+                    await this.markStudentAttendance(this.swipedItem.dataset.studentId, 'presente');
+                    this.swipedItem.style.transform = 'translateX(0)'; // Reset style
+                } else {
+                    // Swipe not far enough, animate back
+                    this.swipedItem.style.transform = 'translateX(0)';
+                }
+                
+                this.swipedItem.classList.remove('swiping');
+                this.swipedItem = null;
+                // A small delay to prevent click event after swipe
+                setTimeout(() => { this.isSwiping = false; }, 100);
             }
         }
 
