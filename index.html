@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="pt-PT" data-color-scheme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registo de Presenças</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2196F3">
+    <meta name="description" content="Aplicação para registo simplificado de presenças escolares">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    
+    <style>
+        :root {
+          /* Light Mode Color Tokens */
+          --color-background: #FCFCF9;
+          --color-surface: #FFFFFF;
+          --color-text: #13343B;
+          --color-text-secondary: #626C71;
+          --color-primary: #21808D;
+          --color-primary-hover: #1D727E;
+          --color-border: rgba(94, 82, 64, 0.2);
+          --color-btn-primary-text: #FFFFFF;
+          --color-secondary: rgba(94, 82, 64, 0.12);
+          --color-warning: #A84B2F;
+          --color-danger: #B91C1C;
+          --color-focus-ring: rgba(33, 128, 141, 0.4);
+        }
+
+        [data-color-scheme="dark"] {
+          /* Dark Mode Color Tokens */
+          --color-background: #1F2121;
+          --color-surface: #262828;
+          --color-text: #F5F5F5;
+          --color-text-secondary: rgba(167, 169, 169, 0.7);
+          --color-primary: #32B8C6;
+          --color-primary-hover: #2DA2AF;
+          --color-border: rgba(119, 124, 124, 0.3);
+          --color-btn-primary-text: #13343B;
+          --color-secondary: rgba(119, 124, 124, 0.15);
+          --color-warning: #E68161;
+          --color-danger: #F87171;
+          --color-focus-ring: rgba(50, 184, 198, 0.4);
+        }
+
+        :root {
+          /* Shared Design Tokens */
+          --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          --font-size-sm: 12px; --font-size-base: 14px; --font-size-lg: 16px;
+          --font-size-xl: 18px; --font-size-2xl: 20px; --font-size-3xl: 24px;
+          --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px;
+          --space-20: 20px; --space-24: 24px; --space-32: 32px;
+          --radius-base: 8px; --radius-lg: 12px; --radius-full: 9999px;
+          --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+          --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+          --duration-normal: 250ms;
+          --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+          --container-lg: 1024px;
+        }
+
+        html { font-family: var(--font-family-base); color: var(--color-text); background-color: var(--color-background); -webkit-font-smoothing: antialiased; box-sizing: border-box; }
+        body { margin: 0; padding: 0; }
+        *, *::before, *::after { box-sizing: inherit; }
+        h1, h2, h3, h4 { margin: 0; font-weight: 600; }
+        h1 { font-size: var(--font-size-3xl); } h2 { font-size: var(--font-size-2xl); }
+        h3 { font-size: var(--font-size-xl); } h4 { font-size: var(--font-size-lg); }
+        p { margin: 0; }
+        
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-8) var(--space-16); border-radius: var(--radius-base); font-size: var(--font-size-base); font-weight: 500; cursor: pointer; transition: all var(--duration-normal) var(--ease-standard); border: none; text-decoration: none; }
+        .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-focus-ring); }
+        .btn--primary { background: var(--color-primary); color: var(--color-btn-primary-text); }
+        .btn--primary:hover { background: var(--color-primary-hover); }
+        .btn--outline { background: transparent; border: 1px solid var(--color-border); color: var(--color-text); }
+        .btn--outline:hover { background: var(--color-secondary); }
+        .btn--danger { background: var(--color-danger); color: white; }
+        .btn > span { margin-right: var(--space-8); }
+        .btn--sm { padding: var(--space-4) var(--space-8); font-size: var(--font-size-sm); }
+
+
+        .form-control { display: block; width: 100%; padding: var(--space-8) var(--space-12); font-size: var(--font-size-base); color: var(--color-text); background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-base); }
+        .form-label { display: block; margin-bottom: var(--space-8); font-weight: 500; font-size: var(--font-size-sm); }
+        .form-group { margin-bottom: var(--space-16); }
+        
+        .hidden { display: none !important; }
+
+        /* App Specific Styles */
+        .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--color-background); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
+        .loading-spinner { width: 40px; height: 40px; border: 4px solid var(--color-border); border-top-color: var(--color-primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: var(--space-16); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .app-container { min-height: 100vh; background: var(--color-background); }
+        .app-header { background: var(--color-primary); color: var(--color-btn-primary-text); padding: var(--space-16); box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 100; }
+        .header-content { display: flex; align-items: center; justify-content: space-between; max-width: var(--container-lg); margin: 0 auto; }
+        .header-title h1 { color: var(--color-btn-primary-text); font-size: var(--font-size-xl); }
+        .header-title p { color: rgba(255, 255, 255, 0.8); font-size: var(--font-size-sm); }
+        [data-color-scheme="dark"] .header-title p { color: rgba(0, 0, 0, 0.8); }
+        .header-actions { display: flex; gap: var(--space-8); }
+        .btn-icon { background: rgba(255, 255, 255, 0.2); border: none; border-radius: var(--radius-full); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--color-btn-primary-text); cursor: pointer; transition: background var(--duration-normal); }
+        .btn-icon:hover { background: rgba(255, 255, 255, 0.3); }
+        [data-color-scheme="dark"] .btn-icon { background: rgba(0, 0, 0, 0.2); }
+        [data-color-scheme="dark"] .btn-icon:hover { background: rgba(0, 0, 0, 0.3); }
+
+        .main-content { max-width: var(--container-lg); margin: 0 auto; padding: var(--space-24) var(--space-16); }
+        .view { display: none; }
+        .view.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .dashboard-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-16); margin-bottom: var(--space-32); }
+        .stat-card { background: var(--color-surface); border-radius: var(--radius-lg); padding: var(--space-20); display: flex; align-items: center; gap: var(--space-16); box-shadow: var(--shadow-sm); border: 1px solid var(--color-border); }
+        .stat-icon { font-size: 2rem; opacity: 0.8; }
+        .stat-info h3 { font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-primary); }
+        .stat-info p { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+
+        .section { margin-bottom: var(--space-32); }
+        .section h2 { margin-bottom: var(--space-16); color: var(--color-text); }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-16); flex-wrap: wrap; gap: 16px; }
+        .section-header-actions { display: flex; gap: var(--space-8); }
+
+        .classes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-16); }
+        .class-card { background: var(--color-surface); border-radius: var(--radius-lg); padding: var(--space-20); border: 1px solid var(--color-border); cursor: pointer; transition: all var(--duration-normal); position: relative; overflow: hidden; }
+        .class-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--color-primary); }
+        .class-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .class-card h3 { margin-bottom: var(--space-8); }
+        .class-card p { color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-bottom: var(--space-12); }
+        
+        .students-list { display: flex; flex-direction: column; gap: var(--space-8); margin-bottom: var(--space-24); }
+        .student-item { background: var(--color-surface); border-radius: var(--radius-base); padding: var(--space-16); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: transform 0.3s ease, background 0.1s linear; touch-action: pan-y; position: relative; overflow: hidden; }
+        .student-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #e0e0e0; transition: background var(--duration-normal); }
+        .student-item.presente::before { background: #4CAF50; } .student-item.ausente::before { background: #F44336; } .student-item.atrasado::before { background: #FF9800; } .student-item.justificado::before { background: #2196F3; }
+        .student-info { display: flex; align-items: center; gap: var(--space-12); }
+        .student-number { background: var(--color-secondary); color: var(--color-text); width: 32px; height: 32px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: var(--font-size-sm); font-weight: 500; }
+        .student-name { font-weight: 500; }
+        .student-status { display: flex; align-items: center; gap: var(--space-8); font-size: var(--font-size-sm); }
+        .status-icon { font-size: var(--font-size-lg); }
+        
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 1; transition: opacity var(--duration-normal); }
+        .modal.hidden { opacity: 0; pointer-events: none; }
+        .modal-content { background: var(--color-surface); border-radius: var(--radius-lg); max-width: 500px; width: 90%; box-shadow: var(--shadow-lg); transform: scale(0.95); opacity: 0; transition: all var(--duration-normal) var(--ease-standard); max-height: 85vh; display: flex; flex-direction: column; }
+        .modal:not(.hidden) .modal-content { transform: scale(1); opacity: 1; }
+        .modal-header { padding: var(--space-16); border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; }
+        .modal-body { padding: var(--space-16); overflow-y: auto; }
+        .modal-footer { padding: var(--space-16); border-top: 1px solid var(--color-border); display: flex; justify-content: flex-end; gap: var(--space-12); }
+        
+        .attendance-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-12); margin-bottom: var(--space-20); }
+        .attendance-btn { padding: var(--space-12); border-radius: var(--radius-base); border: 2px solid transparent; cursor: pointer; transition: transform var(--duration-normal); display: flex; align-items: center; justify-content: center; gap: var(--space-8); }
+        .attendance-btn.selected { border-color: var(--color-primary); transform: scale(1.05); }
+        .attendance-btn[data-status="presente"] { background: #4CAF50; color: white; } .attendance-btn[data-status="ausente"] { background: #F44336; color: white; } .attendance-btn[data-status="atrasado"] { background: #FF9800; color: white; } .attendance-btn[data-status="justificado"] { background: #2196F3; color: white; }
+
+        .setting-item { margin-bottom: var(--space-20); }
+        .theme-options { display: flex; gap: var(--space-12); }
+        .theme-options .btn { flex: 1; border: 1px solid var(--color-border); }
+        .theme-options .btn.active { background: var(--color-primary); color: var(--color-btn-primary-text); border-color: var(--color-primary); }
+
+        .management-list { display: flex; flex-direction: column; gap: var(--space-8); }
+        .management-item { background: var(--color-secondary); padding: var(--space-12); border-radius: var(--radius-base); display: flex; justify-content: space-between; align-items: center; }
+        .management-item-actions { display: flex; gap: var(--space-8); }
+
+        .fab { position: fixed; bottom: var(--space-24); right: var(--space-24); width: 56px; height: 56px; border-radius: var(--radius-full); background: var(--color-primary); color: var(--color-btn-primary-text); border: none; box-shadow: var(--shadow-lg); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: var(--font-size-2xl); transition: transform var(--duration-normal); z-index: 100; }
+        .fab:hover { transform: scale(1.1); }
+
+        .toast { position: fixed; bottom: var(--space-24); left: 50%; transform: translateX(-50%) translateY(100px); background: #262828; color: white; padding: var(--space-12) var(--space-20); border-radius: var(--radius-full); font-size: var(--font-size-sm); z-index: 1001; transition: transform var(--duration-normal); }
+        .toast:not(.hidden) { transform: translateX(-50%) translateY(0); }
+
+        .quick-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-16); margin-top: var(--space-24); }
+
+        .reports-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-24); margin-bottom: var(--space-32); }
+        .report-card { background: var(--color-surface); border-radius: var(--radius-lg); padding: var(--space-20); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-16); margin-top: var(--space-16); }
+        .summary-item { text-align: center; padding: var(--space-16); background: var(--color-secondary); border-radius: var(--radius-base); }
+        .summary-number { font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-primary); }
+        .summary-label { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-4); }
+
+        .history-filters { display: flex; gap: var(--space-16); flex-wrap: wrap; }
+        .history-list { display: flex; flex-direction: column; gap: var(--space-16); }
+        .history-item { background: var(--color-surface); border-radius: var(--radius-base); padding: var(--space-16); border: 1px solid var(--color-border); }
+        .history-header-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-12); }
+        .history-date { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+        .history-stats { display: flex; gap: var(--space-16); font-size: var(--font-size-sm); }
+        .history-stat { display: flex; align-items: center; gap: var(--space-4); }
+
+
+        @media (max-width: 768px) { .attendance-actions, .quick-actions { flex-direction: column; } .attendance-actions .btn, .quick-actions .btn { width: 100%; } }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>A carregar...</p>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="app-container hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <button id="back-btn" class="btn-icon hidden">
+                    <span>←</span>
+                </button>
+                <div class="header-title">
+                    <h1 id="page-title">Registo de Presenças</h1>
+                    <p id="page-subtitle"></p>
+                </div>
+                <div class="header-actions">
+                    <button id="settings-btn" class="btn-icon" title="Configurações">
+                        <span>⚙️</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view active">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3 id="total-students">0</h3>
+                            <p>Total de Alunos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✓</div>
+                        <div class="stat-info">
+                            <h3 id="present-today">0</h3>
+                            <p>Presentes Hoje</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✗</div>
+                        <div class="stat-info">
+                            <h3 id="absent-today">0</h3>
+                            <p>Ausentes Hoje</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>As Minhas Turmas</h2>
+                    <div id="classes-grid" class="classes-grid"></div>
+                </div>
+                <div class="section">
+                    <h2>Acesso Rápido</h2>
+                    <div class="quick-actions">
+                        <button id="show-reports-btn" class="btn btn--primary"><span>📊</span> Relatórios</button>
+                        <button id="show-history-btn" class="btn btn--primary"><span>📋</span> Histórico</button>
+                        <button id="show-individual-report-btn" class="btn btn--primary"><span>👤</span> Relatório de Aluno</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance View -->
+            <div id="attendance-view" class="view">
+                <div class="section-header">
+                    <h2 id="attendance-class-name"></h2>
+                </div>
+                <div id="students-list" class="students-list"></div>
+                <div class="section-header-actions" style="margin-top: 16px;">
+                    <button id="mark-all-present-btn" class="btn btn--primary"><span>✓</span> Marcar Todos Presentes</button>
+                </div>
+            </div>
+            
+            <!-- Management View -->
+            <div id="management-view" class="view">
+                <div class="section-header">
+                    <h2>Gerir Turmas</h2>
+                    <button id="add-class-btn" class="btn btn--primary"><span>+</span>Adicionar Turma</button>
+                </div>
+                <div id="management-list" class="management-list"></div>
+            </div>
+
+            <!-- Reports View -->
+            <div id="reports-view" class="view">
+                <div class="section-header">
+                    <h2>Relatórios Semanais</h2>
+                    <div class="section-header-actions">
+                        <input type="week" id="week-picker" class="form-control" style="max-width: 200px;">
+                        <button id="export-report-btn" class="btn btn--outline"><span>↓</span> Exportar (CSV)</button>
+                    </div>
+                </div>
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>Estatísticas da Semana</h3>
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="weekly-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <h3>Resumo Semanal</h3>
+                        <div id="weekly-summary" class="summary-grid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History View -->
+            <div id="history-view" class="view">
+                <div class="section-header">
+                    <h2>Histórico de Presenças</h2>
+                    <button id="export-history-btn" class="btn btn--outline"><span>↓</span> Exportar Vista (CSV)</button>
+                </div>
+                <div class="history-filters">
+                    <select id="class-filter" class="form-control"><option value="">Todas as turmas</option></select>
+                    <input type="date" id="date-filter" class="form-control">
+                </div>
+                <div id="history-list" class="history-list" style="margin-top: 24px;"></div>
+            </div>
+
+            <!-- Individual Report View -->
+            <div id="individual-report-view" class="view">
+                <div class="section-header">
+                    <h2>Relatório Individual de Aluno</h2>
+                    <button id="export-individual-report-btn" class="btn btn--outline"><span>↓</span> Exportar (CSV)</button>
+                </div>
+                <div class="history-filters">
+                    <select id="individual-report-class-filter" class="form-control"><option value="">Selecione uma turma...</option></select>
+                    <select id="individual-report-student-filter" class="form-control" disabled><option value="">Selecione um aluno...</option></select>
+                    <input type="date" id="individual-report-start-date" class="form-control">
+                    <input type="date" id="individual-report-end-date" class="form-control">
+                </div>
+                <div id="individual-report-content" class="hidden" style="margin-top: 24px;">
+                    <div class="report-card">
+                        <h3 id="individual-report-student-name"></h3>
+                        <div id="individual-report-summary" class="summary-grid"></div>
+                    </div>
+                    <div id="individual-report-list" class="history-list" style="margin-top: 24px;"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- FAB -->
+        <button id="fab" class="fab" title="Registo Rápido"><span>✓</span></button>
+    </div>
+
+    <!-- Modals -->
+    <div id="student-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-student-name"></h3>
+                <button id="modal-close-btn" class="btn-icon"><span>✕</span></button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-attendance-options" class="attendance-options">
+                    <button class="btn attendance-btn" data-status="presente"><span>✓</span> Presente</button>
+                    <button class="btn attendance-btn" data-status="ausente"><span>✗</span> Ausente</button>
+                    <button class="btn attendance-btn" data-status="atrasado"><span>⏰</span> Atrasado</button>
+                    <button class="btn attendance-btn" data-status="justificado"><span>📄</span> Justificado</button>
+                </div>
+                <div class="note-section">
+                    <label class="form-label">Observações</label>
+                    <textarea id="student-note" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-cancel-btn" class="btn btn--outline">Cancelar</button>
+                <button id="modal-save-btn" class="btn btn--primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Configurações</h3>
+                <button id="settings-modal-close-btn" class="btn-icon"><span>✕</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-item">
+                    <label for="school-name-input" class="form-label">Nome da Escola</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="school-name-input" class="form-control">
+                        <button type="button" id="save-school-name-btn" class="btn btn--primary">Guardar</button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label class="form-label">Tema da Aplicação</label>
+                    <div class="theme-options">
+                        <button id="theme-light-btn" class="btn btn--outline">Claro</button>
+                        <button id="theme-dark-btn" class="btn btn--outline">Escuro</button>
+                    </div>
+                </div>
+                <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--space-20) 0;">
+                <div class="setting-item">
+                    <label class="form-label">Gestão de Dados</label>
+                    <button id="manage-classes-btn" class="btn btn--primary">Gerir Turmas e Alunos</button>
+                </div>
+                <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--space-20) 0;">
+                <div class="setting-item">
+                    <label class="form-label">Backup e Restauro</label>
+                    <div class="quick-actions">
+                        <button id="backup-data-btn" class="btn btn--outline"><span>↓</span> Exportar Todos os Dados</button>
+                        <button id="restore-data-btn" class="btn btn--outline"><span>↑</span> Importar Dados</button>
+                        <input type="file" id="restore-file-input" class="hidden" accept=".json">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="class-editor-modal" class="modal hidden">
+        <div class="modal-content">
+            <form id="class-editor-form">
+                <div class="modal-header">
+                    <h3 id="class-editor-title"></h3>
+                    <button type="button" class="btn-icon class-editor-close-btn"><span>✕</span></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit-class-id">
+                    <div class="form-group"><label for="edit-class-name" class="form-label">Nome da Turma</label><input type="text" id="edit-class-name" class="form-control" required></div>
+                    <div class="form-group"><label for="edit-class-subject" class="form-label">Disciplina</label><input type="text" id="edit-class-subject" class="form-control"></div>
+                    <div class="form-group"><label for="edit-class-teacher" class="form-label">Professor</label><input type="text" id="edit-class-teacher" class="form-control"></div>
+                    <div class="section-header">
+                        <h4>Alunos</h4>
+                        <div class="section-header-actions">
+                             <button type="button" id="import-students-btn" class="btn btn--outline btn--sm"><span>↑</span> Importar</button>
+                             <button type="button" id="add-student-btn" class="btn btn--primary btn--sm"><span>+</span> Adicionar</button>
+                        </div>
+                    </div>
+                    <div id="class-editor-student-list" class="management-list"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn--outline class-editor-close-btn">Cancelar</button>
+                    <button type="submit" class="btn btn--primary">Guardar Turma</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="student-editor-modal" class="modal hidden">
+        <div class="modal-content">
+             <form id="student-editor-form">
+                <div class="modal-header"><h3 id="student-editor-title"></h3><button type="button" class="btn-icon student-editor-close-btn"><span>✕</span></button></div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit-student-id"><input type="hidden" id="edit-student-class-id">
+                    <div class="form-group"><label for="edit-student-name" class="form-label">Nome do Aluno</label><input type="text" id="edit-student-name" class="form-control" required></div>
+                    <div class="form-group"><label for="edit-student-number" class="form-label">Número</label><input type="number" id="edit-student-number" class="form-control" required></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn--outline student-editor-close-btn">Cancelar</button>
+                    <button type="submit" class="btn btn--primary">Guardar Aluno</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="student-importer-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header"><h3>Importar Alunos</h3><button type="button" class="btn-icon student-importer-close-btn"><span>✕</span></button></div>
+            <div class="modal-body">
+                <p>Cole a lista de alunos abaixo. Use o formato: <strong>Número, Nome</strong> (um aluno por linha).</p>
+                <div class="form-group"><textarea id="import-student-list" class="form-control" rows="10" placeholder="1, Ana Silva&#10;2, Bruno Costa&#10;..."></textarea></div>
+                <div id="import-preview-container" class="hidden"><h4>Pré-visualização</h4><div id="import-preview" class="management-list"></div></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn--outline student-importer-close-btn">Cancelar</button>
+                <button type="button" id="import-students-confirm-btn" class="btn btn--primary">Importar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal hidden">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header"><h3 id="confirm-title"></h3></div>
+            <div class="modal-body"><p id="confirm-message"></p></div>
+            <div class="modal-footer">
+                <button id="confirm-cancel-btn" class="btn btn--outline">Cancelar</button>
+                <button id="confirm-ok-btn" class="btn btn--danger">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden"><span id="toast-message"></span></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        class AttendanceApp {
+            constructor() {
+                this.db = null;
+                this.currentClass = null;
+                this.currentStudent = null;
+                this.data = { turmas: [] };
+                this.schoolName = 'A Minha Escola';
+                this.attendanceData = []; // Now an array to store all records
+                this.charts = {};
+
+                // Swipe gesture properties
+                this.touchStartX = 0;
+                this.touchStartY = 0;
+                this.swipedItem = null;
+                this.isSwiping = false;
+                
+                this.defaultData = {
+                    "turmas": [
+                        { "id": "7a", "nome": "7º A", "disciplina": "Matemática", "professor": "Prof. Ana Silva", "alunos": [
+                            {"id": "s1", "numero": 1, "nome": "Francisco Pereira"}, {"id": "s2", "numero": 2, "nome": "Maria Santos"}
+                        ]},
+                        { "id": "8b", "nome": "8º B", "disciplina": "Português", "professor": "Prof. Carlos Mendes", "alunos": [
+                            {"id": "s21", "numero": 1, "nome": "Martim Silva"}, {"id": "s22", "numero": 2, "nome": "Lara Costa"}
+                        ]}
+                    ]
+                };
+
+                this.init();
+            }
+
+            async init() {
+                this.loadAppSettings();
+                this.setupEventListeners();
+                await this.initDB();
+                await this.loadAppDataFromDB();
+                await this.loadAttendanceDataFromDB();
+                this.hideLoadingScreen();
+                this.showView('dashboard');
+            }
+
+            hideLoadingScreen() {
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('app').classList.remove('hidden');
+            }
+            
+            async initDB() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open('AttendanceAppDB_v3', 4);
+                    request.onerror = (e) => reject("Erro ao abrir a base de dados: " + e.target.errorCode);
+                    request.onsuccess = (e) => { this.db = e.target.result; resolve(); };
+                    request.onupgradeneeded = (e) => {
+                        const db = e.target.result;
+                        if (!db.objectStoreNames.contains('config')) db.createObjectStore('config', { keyPath: 'key' });
+                        if (!db.objectStoreNames.contains('attendance')) {
+                            const store = db.createObjectStore('attendance', { keyPath: 'id' });
+                            store.createIndex('date', 'date', { unique: false });
+                        }
+                    };
+                });
+            }
+
+            setupEventListeners() {
+                // Navigation
+                document.getElementById('back-btn').addEventListener('click', () => this.showView('dashboard'));
+                document.getElementById('settings-btn').addEventListener('click', () => this.openSettingsModal());
+                document.getElementById('fab').addEventListener('click', () => this.quickAttendance());
+
+                // Dashboard Actions
+                document.getElementById('show-reports-btn').addEventListener('click', () => this.showReports());
+                document.getElementById('show-history-btn').addEventListener('click', () => this.showHistory());
+                document.getElementById('show-individual-report-btn').addEventListener('click', () => this.showIndividualReport());
+
+                // Class Grid & Attendance
+                document.getElementById('classes-grid').addEventListener('click', (e) => {
+                    const card = e.target.closest('.class-card');
+                    if (card) this.openClass(this.data.turmas.find(t => t.id === card.dataset.classId));
+                });
+                const studentList = document.getElementById('students-list');
+                studentList.addEventListener('click', (e) => {
+                    if (this.isSwiping) return;
+                    const item = e.target.closest('.student-item');
+                    if (item) this.openStudentModal(this.currentClass.alunos.find(a => a.id === item.dataset.studentId));
+                });
+                studentList.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+                studentList.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
+                studentList.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+
+                document.getElementById('mark-all-present-btn').addEventListener('click', () => this.markAllPresent());
+
+                // Modals
+                document.getElementById('settings-modal-close-btn').addEventListener('click', () => this.closeSettingsModal());
+                document.getElementById('save-school-name-btn').addEventListener('click', () => this.saveSchoolName());
+                document.getElementById('theme-light-btn').addEventListener('click', () => this.setTheme('light'));
+                document.getElementById('theme-dark-btn').addEventListener('click', () => this.setTheme('dark'));
+                document.getElementById('manage-classes-btn').addEventListener('click', () => { this.closeSettingsModal(); this.showView('management'); });
+                
+                document.getElementById('modal-close-btn').addEventListener('click', () => this.closeStudentModal());
+                document.getElementById('modal-cancel-btn').addEventListener('click', () => this.closeStudentModal());
+                document.getElementById('modal-save-btn').addEventListener('click', () => this.saveStudentAttendance());
+                document.getElementById('modal-attendance-options').addEventListener('click', (e) => {
+                    const button = e.target.closest('.attendance-btn');
+                    if(button) this.selectAttendanceStatus(button.dataset.status);
+                });
+
+                // Management
+                document.getElementById('add-class-btn').addEventListener('click', () => this.openClassEditor());
+                document.getElementById('management-list').addEventListener('click', (e) => {
+                    const target = e.target.closest('button');
+                    if (!target) return;
+                    if (target.matches('.edit-class-btn')) this.openClassEditor(target.dataset.classId);
+                    if (target.matches('.delete-class-btn')) this.deleteClass(target.dataset.classId);
+                });
+                document.getElementById('class-editor-form').addEventListener('submit', (e) => this.saveClass(e));
+                document.querySelectorAll('.class-editor-close-btn').forEach(btn => btn.addEventListener('click', () => this.closeClassEditor()));
+                document.getElementById('add-student-btn').addEventListener('click', () => this.openStudentEditor());
+                document.getElementById('import-students-btn').addEventListener('click', () => this.openStudentImporter());
+                document.getElementById('class-editor-student-list').addEventListener('click', (e) => {
+                    const target = e.target.closest('button');
+                    if (!target) return;
+                    if (target.matches('.edit-student-btn')) this.openStudentEditor(target.dataset.studentId);
+                    if (target.matches('.delete-student-btn')) this.deleteStudent(target.dataset.studentId);
+                });
+                document.getElementById('student-editor-form').addEventListener('submit', (e) => this.saveStudent(e));
+                document.querySelectorAll('.student-editor-close-btn').forEach(btn => btn.addEventListener('click', () => this.closeStudentEditor()));
+                document.querySelectorAll('.student-importer-close-btn').forEach(btn => btn.addEventListener('click', () => this.closeStudentImporter()));
+                document.getElementById('import-student-list').addEventListener('input', () => this.previewStudentImport());
+                document.getElementById('import-students-confirm-btn').addEventListener('click', () => this.handleStudentImport());
+
+                // Reports & History
+                document.getElementById('week-picker').addEventListener('change', (e) => this.updateWeeklyReport(e.target.value));
+                document.getElementById('class-filter').addEventListener('change', () => this.filterHistory());
+                document.getElementById('date-filter').addEventListener('change', () => this.filterHistory());
+                document.getElementById('export-report-btn').addEventListener('click', () => this.exportWeekReportToCSV());
+                document.getElementById('export-history-btn').addEventListener('click', () => this.exportHistoryToCSV());
+                document.getElementById('export-individual-report-btn').addEventListener('click', () => this.exportIndividualReportToCSV());
+                
+                // Individual Report Filters
+                document.getElementById('individual-report-class-filter').addEventListener('change', (e) => this.populateIndividualStudentFilter(e.target.value));
+                document.getElementById('individual-report-student-filter').addEventListener('change', () => this.generateIndividualReport());
+                document.getElementById('individual-report-start-date').addEventListener('change', () => this.generateIndividualReport());
+                document.getElementById('individual-report-end-date').addEventListener('change', () => this.generateIndividualReport());
+
+                // Backup & Restore
+                document.getElementById('backup-data-btn').addEventListener('click', () => this.backupData());
+                document.getElementById('restore-data-btn').addEventListener('click', () => document.getElementById('restore-file-input').click());
+                document.getElementById('restore-file-input').addEventListener('change', (e) => this.restoreData(e));
+            }
+            
+            // --- DATA & SETTINGS ---
+            loadAppSettings() {
+                this.setTheme(localStorage.getItem('attendanceAppTheme') || 'light');
+                this.schoolName = localStorage.getItem('attendanceAppSchoolName') || 'A Minha Escola';
+                document.getElementById('page-subtitle').textContent = this.schoolName;
+            }
+            saveSchoolName() {
+                const newName = document.getElementById('school-name-input').value.trim();
+                if (newName) {
+                    this.schoolName = newName;
+                    localStorage.setItem('attendanceAppSchoolName', newName);
+                    document.getElementById('page-subtitle').textContent = this.schoolName;
+                    this.showToast('Nome da escola atualizado!');
+                }
+            }
+            async loadAppDataFromDB() {
+                const data = await this.getConfig('appData');
+                this.data = data || this.defaultData;
+                if (!data) await this.saveAppDataToDB();
+            }
+            async saveAppDataToDB() {
+                await this.setConfig('appData', this.data);
+                this.renderCurrentView();
+            }
+            async loadAttendanceDataFromDB() {
+                this.attendanceData = await this.getAllFromDB('attendance');
+                this.updateDashboardStats();
+            }
+
+            // --- THEME & MODALS ---
+            setTheme(theme) {
+                document.documentElement.setAttribute('data-color-scheme', theme);
+                localStorage.setItem('attendanceAppTheme', theme);
+                document.getElementById('theme-light-btn').classList.toggle('active', theme === 'light');
+                document.getElementById('theme-dark-btn').classList.toggle('active', theme === 'dark');
+            }
+            openSettingsModal() {
+                document.getElementById('school-name-input').value = this.schoolName;
+                document.getElementById('settings-modal').classList.remove('hidden');
+            }
+            closeSettingsModal() { document.getElementById('settings-modal').classList.add('hidden'); }
+            
+            openClassEditor(classId = null) {
+                this.currentClassId = classId || `class_${Date.now()}`;
+                const isNew = !classId;
+                const form = document.getElementById('class-editor-form');
+                form.reset();
+                document.getElementById('class-editor-title').textContent = isNew ? 'Adicionar Nova Turma' : 'Editar Turma';
+                document.getElementById('edit-class-id').value = this.currentClassId;
+                
+                if (!isNew) {
+                    const turma = this.data.turmas.find(t => t.id === this.currentClassId);
+                    document.getElementById('edit-class-name').value = turma.nome;
+                    document.getElementById('edit-class-subject').value = turma.disciplina;
+                    document.getElementById('edit-class-teacher').value = turma.professor;
+                }
+                this.renderClassEditorStudentList();
+                document.getElementById('class-editor-modal').classList.remove('hidden');
+            }
+            closeClassEditor() { document.getElementById('class-editor-modal').classList.add('hidden'); this.currentClassId = null; }
+            
+            openStudentEditor(studentId = null) {
+                const isNew = !studentId;
+                const form = document.getElementById('student-editor-form');
+                form.reset();
+                document.getElementById('student-editor-title').textContent = isNew ? 'Adicionar Aluno' : 'Editar Aluno';
+                document.getElementById('edit-student-id').value = isNew ? `student_${Date.now()}` : studentId;
+                
+                if (!isNew) {
+                    const turma = this.data.turmas.find(t => t.id === this.currentClassId);
+                    const aluno = turma.alunos.find(a => a.id == studentId);
+                    document.getElementById('edit-student-name').value = aluno.nome;
+                    document.getElementById('edit-student-number').value = aluno.numero;
+                }
+                document.getElementById('student-editor-modal').classList.remove('hidden');
+            }
+            closeStudentEditor() { document.getElementById('student-editor-modal').classList.add('hidden'); }
+
+            openStudentImporter() {
+                document.getElementById('import-student-list').value = '';
+                document.getElementById('import-preview-container').classList.add('hidden');
+                document.getElementById('student-importer-modal').classList.remove('hidden');
+            }
+            closeStudentImporter() { document.getElementById('student-importer-modal').classList.add('hidden'); }
+
+            // --- CRUD OPERATIONS ---
+            async saveClass(event) {
+                event.preventDefault();
+                const classId = document.getElementById('edit-class-id').value;
+                const classIndex = this.data.turmas.findIndex(t => t.id === classId);
+                const newClassData = {
+                    id: classId,
+                    nome: document.getElementById('edit-class-name').value,
+                    disciplina: document.getElementById('edit-class-subject').value,
+                    professor: document.getElementById('edit-class-teacher').value,
+                    alunos: (classIndex > -1) ? this.data.turmas[classIndex].alunos : []
+                };
+                if (classIndex > -1) this.data.turmas[classIndex] = newClassData;
+                else this.data.turmas.push(newClassData);
+                await this.saveAppDataToDB();
+                this.closeClassEditor();
+                this.showToast('Turma guardada!');
+            }
+            async deleteClass(classId) {
+                const confirmed = await this.showConfirm('Apagar Turma', 'Tem a certeza? Esta ação é irreversível.');
+                if (confirmed) {
+                    this.data.turmas = this.data.turmas.filter(t => t.id !== classId);
+                    await this.saveAppDataToDB();
+                    this.showToast('Turma apagada.');
+                }
+            }
+            async saveStudent(event) {
+                event.preventDefault();
+                const studentId = document.getElementById('edit-student-id').value;
+                const turma = this.data.turmas.find(t => t.id === this.currentClassId);
+                if (!turma) return;
+                const newStudentData = {
+                    id: studentId,
+                    nome: document.getElementById('edit-student-name').value,
+                    numero: parseInt(document.getElementById('edit-student-number').value)
+                };
+                const studentIndex = turma.alunos.findIndex(a => a.id == studentId);
+                if (studentIndex > -1) turma.alunos[studentIndex] = newStudentData;
+                else turma.alunos.push(newStudentData);
+                await this.saveAppDataToDB();
+                this.renderClassEditorStudentList();
+                this.closeStudentEditor();
+                this.showToast('Aluno guardado!');
+            }
+            async deleteStudent(studentId) {
+                const turma = this.data.turmas.find(t => t.id === this.currentClassId);
+                if (!turma) return;
+                const confirmed = await this.showConfirm('Apagar Aluno', 'Tem a certeza?');
+                if(confirmed) {
+                    turma.alunos = turma.alunos.filter(a => a.id != studentId);
+                    await this.saveAppDataToDB();
+                    this.renderClassEditorStudentList();
+                    this.showToast('Aluno apagado.');
+                }
+            }
+
+            previewStudentImport() {
+                const text = document.getElementById('import-student-list').value;
+                const previewContainer = document.getElementById('import-preview');
+                const previewWrapper = document.getElementById('import-preview-container');
+                previewContainer.innerHTML = '';
+
+                const turma = this.data.turmas.find(t => t.id === this.currentClassId);
+                const existingNumbers = new Set(turma.alunos.map(a => a.numero));
+
+                const lines = text.split('\n').filter(line => line.trim() !== '');
+                if (lines.length === 0) {
+                    previewWrapper.classList.add('hidden');
+                    return;
+                }
+
+                let newStudentsCount = 0;
+                lines.forEach(line => {
+                    const parts = line.split(/[,;\t]/); // Split by comma, semicolon or tab
+                    if (parts.length < 2) return;
+                    
+                    const numero = parseInt(parts[0].trim(), 10);
+                    const nome = parts.slice(1).join(' ').trim();
+
+                    if (!isNaN(numero) && nome) {
+                        const item = document.createElement('div');
+                        item.className = 'management-item';
+                        let status = 'Adicionar';
+                        if (existingNumbers.has(numero)) {
+                            status = 'Ignorar (nº já existe)';
+                            item.style.opacity = '0.5';
+                        } else {
+                            newStudentsCount++;
+                        }
+                        item.innerHTML = `<span><strong>${numero}.</strong> ${nome}</span> <span>${status}</span>`;
+                        previewContainer.appendChild(item);
+                    }
+                });
+                previewWrapper.classList.remove('hidden');
+                document.getElementById('import-students-confirm-btn').textContent = `Importar ${newStudentsCount} Aluno(s)`;
+            }
+
+            async handleStudentImport() {
+                const text = document.getElementById('import-student-list').value;
+                const turma = this.data.turmas.find(t => t.id === this.currentClassId);
+                if (!turma) return;
+
+                const existingNumbers = new Set(turma.alunos.map(a => a.numero));
+                const lines = text.split('\n').filter(line => line.trim() !== '');
+                let importedCount = 0;
+
+                lines.forEach(line => {
+                    const parts = line.split(/[,;\t]/);
+                    if (parts.length < 2) return;
+                    
+                    const numero = parseInt(parts[0].trim(), 10);
+                    const nome = parts.slice(1).join(' ').trim();
+
+                    if (!isNaN(numero) && nome && !existingNumbers.has(numero)) {
+                        turma.alunos.push({ id: `student_${Date.now()}_${numero}`, numero, nome });
+                        existingNumbers.add(numero); // Add to set to avoid duplicates within the same import
+                        importedCount++;
+                    }
+                });
+
+                if (importedCount > 0) {
+                    await this.saveAppDataToDB();
+                    this.renderClassEditorStudentList();
+                    this.showToast(`${importedCount} aluno(s) importado(s) com sucesso!`);
+                } else {
+                    this.showToast('Nenhum aluno novo para importar.');
+                }
+                this.closeStudentImporter();
+            }
+
+            // --- UI & VIEWS ---
+            renderCurrentView() {
+                const activeView = document.querySelector('.view.active');
+                if (!activeView) { this.showView('dashboard'); return; }
+                switch(activeView.id) {
+                    case 'dashboard-view': this.renderDashboard(); break;
+                    case 'management-view': this.renderManagementView(); break;
+                    case 'attendance-view': this.renderStudentsList(); break;
+                    case 'reports-view': this.renderReportsView(); break;
+                    case 'history-view': this.renderHistoryView(); break;
+                    case 'individual-report-view': this.renderIndividualReportView(); break;
+                }
+            }
+
+            showView(viewName) {
+                document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+                const view = document.getElementById(`${viewName}-view`);
+                if (view) view.classList.add('active');
+                
+                document.getElementById('back-btn').classList.toggle('hidden', viewName === 'dashboard');
+                const titles = { dashboard: 'Registo de Presenças', attendance: this.currentClass?.nome, management: 'Gestão de Turmas', reports: 'Relatórios', history: 'Histórico', 'individual-report': 'Relatório de Aluno' };
+                document.getElementById('page-title').textContent = titles[viewName] || 'Registo';
+                this.renderCurrentView();
+            }
+            
+            renderDashboard() {
+                this.updateDashboardStats();
+                const grid = document.getElementById('classes-grid');
+                grid.innerHTML = '';
+                if (!this.data.turmas || this.data.turmas.length === 0) {
+                    grid.innerHTML = '<p>Nenhuma turma encontrada. Adicione uma nas configurações (⚙️).</p>';
+                    return;
+                }
+                this.data.turmas.forEach(turma => {
+                    const card = document.createElement('div');
+                    card.className = 'class-card';
+                    card.dataset.classId = turma.id;
+                    card.innerHTML = `<h3>${turma.nome}</h3><p>${turma.disciplina || 'Sem disciplina'}</p>`;
+                    grid.appendChild(card);
+                });
+            }
+            
+            updateDashboardStats() {
+                const totalStudents = this.data.turmas.reduce((sum, turma) => sum + (turma.alunos ? turma.alunos.length : 0), 0);
+                document.getElementById('total-students').textContent = totalStudents;
+
+                const today = new Date().toISOString().split('T')[0];
+                let presentToday = 0;
+                let absentToday = 0;
+
+                this.attendanceData.forEach(record => {
+                    if (record.date === today) {
+                        if (record.status === 'presente') presentToday++;
+                        else if (record.status === 'ausente') absentToday++;
+                    }
+                });
+
+                document.getElementById('present-today').textContent = presentToday;
+                document.getElementById('absent-today').textContent = absentToday;
+            }
+
+            openClass(turma) { this.currentClass = turma; this.showView('attendance'); }
+            
+            quickAttendance() {
+                if (this.data.turmas && this.data.turmas.length > 0) {
+                    this.openClass(this.data.turmas[0]);
+                } else {
+                    this.showToast('Nenhuma turma encontrada. Adicione uma primeiro.');
+                }
+            }
+
+            renderManagementView() {
+                const list = document.getElementById('management-list');
+                list.innerHTML = '';
+                this.data.turmas.forEach(turma => {
+                    const item = document.createElement('div');
+                    item.className = 'management-item';
+                    item.innerHTML = `<span>${turma.nome} (${turma.alunos.length} alunos)</span><div class="management-item-actions"><button class="btn btn--outline btn--sm edit-class-btn" data-class-id="${turma.id}">Editar</button><button class="btn btn--danger btn--sm delete-class-btn" data-class-id="${turma.id}">Apagar</button></div>`;
+                    list.appendChild(item);
+                });
+            }
+            renderClassEditorStudentList() {
+                const turma = this.data.turmas.find(t => t.id === this.currentClassId);
+                const list = document.getElementById('class-editor-student-list');
+                list.innerHTML = '';
+                if (!turma || !turma.alunos) return;
+                turma.alunos.sort((a,b) => a.numero - b.numero).forEach(aluno => {
+                    const item = document.createElement('div');
+                    item.className = 'management-item';
+                    item.innerHTML = `<span><strong>${aluno.numero}.</strong> ${aluno.nome}</span><div class="management-item-actions"><button type="button" class="btn btn--outline btn--sm edit-student-btn" data-student-id="${aluno.id}">Editar</button><button type="button" class="btn btn--danger btn--sm delete-student-btn" data-student-id="${aluno.id}">Apagar</button></div>`;
+                    list.appendChild(item);
+                });
+            }
+
+            // --- ATTENDANCE LOGIC ---
+            renderStudentsList() {
+                const container = document.getElementById('students-list');
+                container.innerHTML = '';
+                if (!this.currentClass) return;
+
+                document.getElementById('attendance-class-name').textContent = this.currentClass.nome;
+                
+                const today = new Date().toISOString().split('T')[0];
+                const todaysRecords = this.attendanceData.filter(r => r.date === today && r.classId === this.currentClass.id);
+
+                this.currentClass.alunos.sort((a,b) => a.numero - b.numero).forEach(aluno => {
+                    const key = this.getAttendanceKey(aluno.id);
+                    const attendance = todaysRecords.find(r => r.id === key);
+                    const statusInfo = this.getStatusInfo(attendance?.status);
+
+                    const item = document.createElement('div');
+                    item.className = 'student-item';
+                    item.dataset.studentId = aluno.id;
+                    if (attendance) item.classList.add(attendance.status);
+                    
+                    item.innerHTML = `
+                        <div class="student-info">
+                            <div class="student-number">${aluno.numero}</div>
+                            <div class="student-name">${aluno.nome}</div>
+                        </div>
+                        <div class="student-status">
+                            <span class="status-icon">${statusInfo.icon}</span>
+                            <span>${statusInfo.text}</span>
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+            }
+            openStudentModal(student) {
+                this.currentStudent = student;
+                document.getElementById('modal-student-name').textContent = student.nome;
+                
+                const key = this.getAttendanceKey(student.id);
+                const attendance = this.attendanceData.find(r => r.id === key);
+                
+                document.getElementById('student-note').value = attendance?.note || '';
+                this.selectAttendanceStatus(attendance?.status);
+                document.getElementById('student-modal').classList.remove('hidden');
+            }
+            closeStudentModal() { document.getElementById('student-modal').classList.add('hidden'); }
+            selectAttendanceStatus(status) {
+                document.querySelectorAll('#modal-attendance-options .attendance-btn').forEach(btn => {
+                    btn.classList.toggle('selected', btn.dataset.status === status);
+                });
+            }
+            async saveStudentAttendance() {
+                const selectedBtn = document.querySelector('#modal-attendance-options .attendance-btn.selected');
+                if (!selectedBtn) { this.showToast('Selecione um estado.'); return; }
+                
+                const status = selectedBtn.dataset.status;
+                const note = document.getElementById('student-note').value.trim();
+                
+                await this.markStudentAttendance(this.currentStudent, status, note);
+                this.closeStudentModal();
+            }
+            async markAllPresent() {
+                if (!this.currentClass) return;
+                const promises = this.currentClass.alunos.map(student => {
+                    const key = this.getAttendanceKey(student.id);
+                    if (!this.attendanceData.some(r => r.id === key)) {
+                        return this.markStudentAttendance(student, 'presente', '', false); // Don't re-render for each
+                    }
+                    return Promise.resolve();
+                });
+
+                await Promise.all(promises);
+                this.renderStudentsList();
+                this.showToast('Todos marcados como presentes.');
+            }
+            getAttendanceKey(studentId) {
+                const today = new Date().toISOString().split('T')[0];
+                return `${today}-${this.currentClass.id}-${studentId}`;
+            }
+            getStatusInfo(status) {
+                switch (status) {
+                    case 'presente': return { icon: '✓', text: 'Presente' };
+                    case 'ausente': return { icon: '✗', text: 'Ausente' };
+                    case 'atrasado': return { icon: '⏰', text: 'Atrasado' };
+                    case 'justificado': return { icon: '📄', text: 'Justificado' };
+                    default: return { icon: '○', text: 'Por marcar' };
+                }
+            }
+
+            // --- REPORTS & HISTORY ---
+            showReports() { this.showView('reports'); }
+            showHistory() { this.showView('history'); }
+            showIndividualReport() { this.showView('individual-report'); }
+
+            renderReportsView() {
+                const now = new Date();
+                const dayOfWeek = now.getDay();
+                const diff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+                const startOfWeek = new Date(now.setDate(diff));
+                
+                const year = startOfWeek.getFullYear();
+                const week = Math.ceil((((startOfWeek - new Date(year, 0, 1)) / 86400000) + 1) / 7);
+
+                const weekString = `${year}-W${String(week).padStart(2, '0')}`;
+                document.getElementById('week-picker').value = weekString;
+                
+                this.updateWeeklyReport(weekString);
+            }
+            
+            updateWeeklyReport(weekString) {
+                if (!weekString) return;
+                const [year, week] = weekString.split('-W').map(Number);
+                const simple = new Date(year, 0, 1 + (week - 1) * 7);
+                const dow = simple.getDay();
+                const startOfWeek = simple;
+                if (dow <= 4) startOfWeek.setDate(simple.getDate() - simple.getDay() + 1);
+                else startOfWeek.setDate(simple.getDate() + 8 - simple.getDay());
+
+                this.createWeeklyChart(startOfWeek);
+                this.createWeeklySummary(startOfWeek);
+            }
+
+            createWeeklyChart(startDate) {
+                const labels = [];
+                const weekData = [];
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + i);
+                    const dateStr = date.toISOString().split('T')[0];
+                    labels.push(date.toLocaleDateString('pt-PT', { weekday: 'short' }));
+                    const present = this.attendanceData.filter(att => att.date === dateStr && att.status === 'presente').length;
+                    weekData.push(present);
+                }
+                this.createChart('weekly-chart', 'line', {
+                    labels,
+                    datasets: [{ label: 'Presenças', data: weekData, borderColor: 'var(--color-primary)', backgroundColor: 'rgba(33, 128, 141, 0.1)', fill: true, tension: 0.4 }]
+                }, { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, color: 'var(--color-text-secondary)' } }, x: { ticks: { color: 'var(--color-text-secondary)' } } } });
+            }
+
+            createWeeklySummary(startDate) {
+                let totalPresent = 0, totalAbsent = 0, totalLate = 0;
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + i);
+                    const dateStr = date.toISOString().split('T')[0];
+                    this.attendanceData.forEach(att => {
+                        if (att.date === dateStr) {
+                            if (att.status === 'presente') totalPresent++;
+                            else if (att.status === 'ausente') totalAbsent++;
+                            else if (att.status === 'atrasado') totalLate++;
+                        }
+                    });
+                }
+                const total = totalPresent + totalAbsent + totalLate;
+                const attendanceRate = total > 0 ? Math.round((totalPresent / total) * 100) : 0;
+                document.getElementById('weekly-summary').innerHTML = `
+                    <div class="summary-item"><div class="summary-number">${totalPresent}</div><div class="summary-label">Presenças</div></div>
+                    <div class="summary-item"><div class="summary-number">${totalAbsent}</div><div class="summary-label">Ausências</div></div>
+                    <div class="summary-item"><div class="summary-number">${totalLate}</div><div class="summary-label">Atrasos</div></div>
+                    <div class="summary-item"><div class="summary-number">${attendanceRate}%</div><div class="summary-label">Taxa de Presença</div></div>
+                `;
+            }
+
+            renderHistoryView() {
+                const classFilter = document.getElementById('class-filter');
+                if (classFilter.options.length <= 1) {
+                    this.data.turmas.forEach(turma => {
+                        const option = document.createElement('option');
+                        option.value = turma.id;
+                        option.textContent = turma.nome;
+                        classFilter.appendChild(option);
+                    });
+                }
+                document.getElementById('date-filter').valueAsDate = new Date();
+                this.filterHistory();
+            }
+
+            filterHistory() {
+                const classFilterValue = document.getElementById('class-filter').value;
+                const dateFilterValue = document.getElementById('date-filter').value;
+                const historyList = document.getElementById('history-list');
+                historyList.innerHTML = '';
+
+                const filteredRecords = this.attendanceData.filter(record => {
+                    const classMatch = !classFilterValue || record.classId === classFilterValue;
+                    const dateMatch = !dateFilterValue || record.date === dateFilterValue;
+                    return classMatch && dateMatch;
+                });
+
+                const groupedRecords = filteredRecords.reduce((acc, record) => {
+                    const key = `${record.date}-${record.classId}`;
+                    if (!acc[key]) {
+                        const className = this.data.turmas.find(t => t.id === record.classId)?.nome || 'Turma Desconhecida';
+                        acc[key] = { date: record.date, className, records: [] };
+                    }
+                    acc[key].records.push(record);
+                    return acc;
+                }, {});
+
+                const sortedGroups = Object.values(groupedRecords).sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                if (sortedGroups.length === 0) {
+                    historyList.innerHTML = '<p style="text-align: center; padding: 2rem;">Nenhum registo encontrado.</p>';
+                    return;
+                }
+
+                sortedGroups.forEach(group => {
+                    const present = group.records.filter(r => r.status === 'presente').length;
+                    const absent = group.records.filter(r => r.status === 'ausente').length;
+                    
+                    const item = document.createElement('div');
+                    item.className = 'history-item';
+                    item.innerHTML = `
+                        <div class="history-header-info">
+                            <h4>${group.className}</h4>
+                            <span class="history-date">${new Date(group.date).toLocaleDateString('pt-PT')}</span>
+                        </div>
+                        <div class="history-stats">
+                            <div class="history-stat"><span style="color: #4CAF50;">✓</span> ${present} presentes</div>
+                            <div class="history-stat"><span style="color: #F44336;">✗</span> ${absent} ausentes</div>
+                        </div>
+                    `;
+                    historyList.appendChild(item);
+                });
+            }
+
+            renderIndividualReportView() {
+                const classFilter = document.getElementById('individual-report-class-filter');
+                classFilter.innerHTML = '<option value="">Selecione uma turma...</option>';
+                this.data.turmas.forEach(turma => {
+                    const option = document.createElement('option');
+                    option.value = turma.id;
+                    option.textContent = turma.nome;
+                    classFilter.appendChild(option);
+                });
+
+                const endDate = new Date();
+                const startDate = new Date();
+                startDate.setDate(endDate.getDate() - 30);
+                document.getElementById('individual-report-start-date').valueAsDate = startDate;
+                document.getElementById('individual-report-end-date').valueAsDate = endDate;
+
+                this.populateIndividualStudentFilter('');
+                this.generateIndividualReport();
+            }
+
+            populateIndividualStudentFilter(classId) {
+                const studentFilter = document.getElementById('individual-report-student-filter');
+                studentFilter.innerHTML = '<option value="">Selecione um aluno...</option>';
+                studentFilter.disabled = true;
+                if (!classId) return;
+
+                const turma = this.data.turmas.find(t => t.id === classId);
+                if (turma && turma.alunos) {
+                    turma.alunos.sort((a, b) => a.numero - b.numero).forEach(aluno => {
+                        const option = document.createElement('option');
+                        option.value = aluno.id;
+                        option.textContent = `${aluno.numero}. ${aluno.nome}`;
+                        studentFilter.appendChild(option);
+                    });
+                    studentFilter.disabled = false;
+                }
+                this.generateIndividualReport();
+            }
+
+            generateIndividualReport() {
+                const classId = document.getElementById('individual-report-class-filter').value;
+                const studentId = document.getElementById('individual-report-student-filter').value;
+                const startDate = document.getElementById('individual-report-start-date').value;
+                const endDate = document.getElementById('individual-report-end-date').value;
+                const contentEl = document.getElementById('individual-report-content');
+
+                if (!classId || !studentId || !startDate || !endDate) {
+                    contentEl.classList.add('hidden');
+                    return;
+                }
+                
+                const student = this.data.turmas.find(t => t.id === classId)?.alunos.find(a => a.id === studentId);
+                document.getElementById('individual-report-student-name').textContent = `Relatório de ${student.nome}`;
+
+                const records = this.attendanceData.filter(r => {
+                    return r.studentId === studentId && r.date >= startDate && r.date <= endDate;
+                });
+
+                let present = 0, absent = 0, late = 0, justified = 0;
+                records.forEach(r => {
+                    if (r.status === 'presente') present++;
+                    else if (r.status === 'ausente') absent++;
+                    else if (r.status === 'atrasado') late++;
+                    else if (r.status === 'justificado') justified++;
+                });
+                
+                const total = present + absent + late + justified;
+                const attendanceRate = total > 0 ? Math.round((present / total) * 100) : 0;
+                
+                document.getElementById('individual-report-summary').innerHTML = `
+                    <div class="summary-item"><div class="summary-number">${present}</div><div class="summary-label">Presenças</div></div>
+                    <div class="summary-item"><div class="summary-number">${absent}</div><div class="summary-label">Ausências</div></div>
+                    <div class="summary-item"><div class="summary-number">${late}</div><div class="summary-label">Atrasos</div></div>
+                    <div class="summary-item"><div class="summary-number">${attendanceRate}%</div><div class="summary-label">Taxa de Presença</div></div>
+                `;
+
+                const listEl = document.getElementById('individual-report-list');
+                listEl.innerHTML = '';
+                if (records.length === 0) {
+                    listEl.innerHTML = '<p style="text-align: center; padding: 2rem;">Nenhum registo neste período.</p>';
+                } else {
+                    records.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(record => {
+                        const item = document.createElement('div');
+                        item.className = 'history-item';
+                        item.innerHTML = `
+                            <div class="history-header-info">
+                                <h4>${new Date(record.date).toLocaleDateString('pt-PT')}</h4>
+                                <span class="history-date">${record.status}</span>
+                            </div>
+                            ${record.note ? `<p style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">${record.note}</p>` : ''}
+                        `;
+                        listEl.appendChild(item);
+                    });
+                }
+
+                contentEl.classList.remove('hidden');
+            }
+
+            createChart(canvasId, type, data, options) {
+                const ctx = document.getElementById(canvasId);
+                if (!ctx) return;
+                if (this.charts[canvasId]) this.charts[canvasId].destroy();
+                this.charts[canvasId] = new Chart(ctx.getContext('2d'), { type, data, options });
+            }
+
+            // --- EXPORT ---
+            exportHistoryToCSV() {
+                const classFilterValue = document.getElementById('class-filter').value;
+                const dateFilterValue = document.getElementById('date-filter').value;
+                const records = this.attendanceData.filter(record => {
+                    const classMatch = !classFilterValue || record.classId === classFilterValue;
+                    const dateMatch = !dateFilterValue || record.date === dateFilterValue;
+                    return classMatch && dateMatch;
+                });
+                this.exportToCSV(records, `historico_${dateFilterValue || 'completo'}.csv`);
+            }
+
+            exportWeekReportToCSV() {
+                const weekString = document.getElementById('week-picker').value;
+                if (!weekString) return;
+                const [year, week] = weekString.split('-W').map(Number);
+                const simple = new Date(year, 0, 1 + (week - 1) * 7);
+                const dow = simple.getDay();
+                const startOfWeek = new Date(simple);
+                if (dow <= 4) startOfWeek.setDate(simple.getDate() - simple.getDay() + 1);
+                else startOfWeek.setDate(simple.getDate() + 8 - simple.getDay());
+                
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+                const records = this.attendanceData.filter(record => {
+                    const recordDate = new Date(record.date);
+                    return recordDate >= startOfWeek && recordDate <= endOfWeek;
+                });
+                this.exportToCSV(records, `relatorio_semana_${week}.csv`);
+            }
+
+            exportIndividualReportToCSV() {
+                const classId = document.getElementById('individual-report-class-filter').value;
+                const studentId = document.getElementById('individual-report-student-filter').value;
+                const startDate = document.getElementById('individual-report-start-date').value;
+                const endDate = document.getElementById('individual-report-end-date').value;
+
+                if (!studentId) {
+                    this.showToast('Selecione um aluno para exportar.');
+                    return;
+                }
+
+                const student = this.data.turmas.find(t => t.id === classId)?.alunos.find(a => a.id === studentId);
+                const records = this.attendanceData.filter(r => {
+                    return r.studentId === studentId && r.date >= startDate && r.date <= endDate;
+                });
+
+                this.exportToCSV(records, `relatorio_${student.nome.replace(/\s/g, '_')}.csv`);
+            }
+
+            exportToCSV(records, filename) {
+                if (records.length === 0) {
+                    this.showToast('Não há dados para exportar.');
+                    return;
+                }
+                const headers = ["Data", "Turma", "Numero", "Aluno", "Estado", "Observacoes"];
+                const rows = records.map(record => {
+                    const turma = this.data.turmas.find(t => t.id === record.classId);
+                    const aluno = turma?.alunos.find(a => a.id === record.studentId);
+                    const safeNote = `"${(record.note || '').replace(/"/g, '""')}"`;
+                    return [record.date, turma?.nome || 'N/A', aluno?.numero || 'N/A', aluno?.nome || 'N/A', record.status, safeNote].join(',');
+                });
+
+                const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows].join('\n');
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", filename);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                this.showToast('Exportação concluída!');
+            }
+
+            // --- BACKUP & RESTORE ---
+            async backupData() {
+                try {
+                    const backupData = {
+                        settings: {
+                            schoolName: this.schoolName,
+                            theme: localStorage.getItem('attendanceAppTheme') || 'light'
+                        },
+                        appData: this.data,
+                        attendanceData: this.attendanceData
+                    };
+
+                    const jsonString = JSON.stringify(backupData, null, 2);
+                    const blob = new Blob([jsonString], {type: "application/json"});
+                    const url = URL.createObjectURL(blob);
+
+                    const link = document.createElement('a');
+                    const today = new Date().toISOString().split('T')[0];
+                    link.download = `backup_presencas_${today}.json`;
+                    link.href = url;
+                    link.click();
+                    URL.revokeObjectURL(url);
+                    this.showToast('Backup criado com sucesso!');
+                } catch (error) {
+                    console.error("Erro ao criar backup:", error);
+                    this.showToast('Ocorreu um erro ao criar o backup.');
+                }
+            }
+
+            restoreData(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (!data.appData || !data.attendanceData || !data.settings) {
+                            throw new Error("Ficheiro de backup inválido.");
+                        }
+
+                        const confirmed = await this.showConfirm(
+                            'Restaurar Dados', 
+                            'Tem a certeza? Todos os dados atuais serão substituídos por este backup. Esta ação é irreversível.'
+                        );
+
+                        if (confirmed) {
+                            await this.performRestore(data);
+                        }
+                    } catch (error) {
+                        console.error("Erro ao restaurar dados:", error);
+                        this.showToast('Erro: Ficheiro de backup inválido ou corrompido.');
+                    } finally {
+                        event.target.value = null; // Reset file input
+                    }
+                };
+                reader.readAsText(file);
+            }
+
+            async performRestore(data) {
+                try {
+                    // Clear existing data
+                    await this.clearDBStore('config');
+                    await this.clearDBStore('attendance');
+
+                    // Restore settings
+                    this.schoolName = data.settings.schoolName;
+                    this.setTheme(data.settings.theme);
+                    localStorage.setItem('attendanceAppSchoolName', this.schoolName);
+                    
+                    // Restore app data (classes, students)
+                    this.data = data.appData;
+                    await this.setConfig('appData', this.data);
+
+                    // Restore attendance data
+                    this.attendanceData = data.attendanceData;
+                    const tx = this.db.transaction('attendance', 'readwrite');
+                    const store = tx.objectStore('attendance');
+                    this.attendanceData.forEach(record => store.put(record));
+
+                    await new Promise((resolve, reject) => {
+                        tx.oncomplete = resolve;
+                        tx.onerror = () => reject(tx.error);
+                    });
+
+                    this.showToast('Dados restaurados com sucesso! A aplicação vai recarregar.');
+                    setTimeout(() => window.location.reload(), 2000);
+
+                } catch (error) {
+                    console.error("Falha ao executar o restauro:", error);
+                    this.showToast('Ocorreu um erro grave durante o restauro.');
+                }
+            }
+
+
+            // --- UTILITIES ---
+            showToast(message) {
+                const toast = document.getElementById('toast');
+                toast.querySelector('#toast-message').textContent = message;
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 3000);
+            }
+            showConfirm(title, message) {
+                return new Promise(resolve => {
+                    const modal = document.getElementById('confirm-modal');
+                    modal.querySelector('#confirm-title').textContent = title;
+                    modal.querySelector('#confirm-message').textContent = message;
+                    modal.classList.remove('hidden');
+                    const okBtn = modal.querySelector('#confirm-ok-btn');
+                    const cancelBtn = modal.querySelector('#confirm-cancel-btn');
+                    const cleanup = () => { modal.classList.add('hidden'); okBtn.replaceWith(okBtn.cloneNode(true)); cancelBtn.replaceWith(cancelBtn.cloneNode(true)); };
+                    okBtn.addEventListener('click', () => { cleanup(); resolve(true); }, { once: true });
+                    cancelBtn.addEventListener('click', () => { cleanup(); resolve(false); }, { once: true });
+                });
+            }
+            
+            // --- DB HELPERS ---
+            async setConfig(key, value) { return this.putInDB('config', { key, value }); }
+            async getConfig(key) { const result = await this.getFromDB('config', key); return result?.value; }
+            async putInDB(storeName, data) {
+                return new Promise((resolve, reject) => {
+                    const tx = this.db.transaction(storeName, 'readwrite');
+                    const store = tx.objectStore(storeName);
+                    store.put(data);
+                    tx.oncomplete = resolve;
+                    tx.onerror = () => reject(tx.error);
+                });
+            }
+            async getFromDB(storeName, key) {
+                return new Promise((resolve, reject) => {
+                    const tx = this.db.transaction(storeName, 'readonly');
+                    const request = tx.objectStore(storeName).get(key);
+                    tx.oncomplete = () => resolve(request.result);
+                    tx.onerror = () => reject(tx.error);
+                });
+            }
+            async getAllFromDB(storeName) {
+                return new Promise((resolve, reject) => {
+                    const tx = this.db.transaction(storeName, 'readonly');
+                    const request = tx.objectStore(storeName).getAll();
+                    tx.oncomplete = () => resolve(request.result);
+                    tx.onerror = () => reject(tx.error);
+                });
+            }
+            async clearDBStore(storeName) {
+                return new Promise((resolve, reject) => {
+                    const tx = this.db.transaction(storeName, 'readwrite');
+                    const store = tx.objectStore(storeName);
+                    store.clear();
+                    tx.oncomplete = resolve;
+                    tx.onerror = () => reject(tx.error);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { window.app = new AttendanceApp(); });
+    </script>
+</body>
+</html>
