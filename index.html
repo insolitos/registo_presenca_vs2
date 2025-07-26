@@ -993,6 +993,23 @@
                 await this.markStudentAttendance(this.currentStudent, status, note);
                 this.closeStudentModal();
             }
+            
+            async markStudentAttendance(student, status, note = '', shouldRender = true) {
+                const key = this.getAttendanceKey(student.id);
+                const record = { id: key, date: new Date().toISOString().split('T')[0], classId: this.currentClass.id, studentId: student.id, status, note };
+
+                const recordIndex = this.attendanceData.findIndex(r => r.id === key);
+                if (recordIndex > -1) this.attendanceData[recordIndex] = record;
+                else this.attendanceData.push(record);
+
+                await this.putInDB('attendance', record);
+                
+                if (shouldRender) {
+                    this.renderStudentsList();
+                    this.updateDashboardStats();
+                }
+            }
+
             async markAllPresent() {
                 if (!this.currentClass) return;
                 const promises = this.currentClass.alunos.map(student => {
@@ -1006,6 +1023,7 @@
                 await Promise.all(promises);
                 this.renderStudentsList();
                 this.showToast('Todos marcados como presentes.');
+                this.updateDashboardStats();
             }
             getAttendanceKey(studentId) {
                 const today = new Date().toISOString().split('T')[0];
